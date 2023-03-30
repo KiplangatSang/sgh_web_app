@@ -1,0 +1,173 @@
+@extends('layouts.app')
+
+@section('content')
+				<div class="row m-1">
+								<div class="col col-md-4">
+												<div class="tile">
+																<div class="tile-title">Articles</div>
+																<div class="tile-body">
+																				<h3 class="display-5 text-success"><small>{{ auth()->user()->name }}</small></h3>
+																				<h6><small>{{ auth()->user()->email }}</small> </h6>
+																				<hr>
+																				<div class="col">
+																								<h6> Upload Images or Videos to be used in the blog</h6>
+
+
+
+
+																								<div class="tile">
+																												<div class="tile-title-w-btn">
+																																<h3 class="title">Drag and drop here </h3>
+
+																												</div>
+																												<div class="tile-body">
+																																<p>Drag and drop here.</p>
+																																<form class="text-center dropzone" method="POST" enctype="multipart/form-data"
+																																				action="/post/image/upload">
+																																				<div class="dz-message">Drop files here or click to upload<br><small
+																																												class="text-info">(This is just a dropzone demo. Selected files
+																																												are not actually uploaded.)</small></div>
+																																</form>
+																												</div>
+																								</div>
+
+
+
+																				</div>
+																</div>
+												</div>
+								</div>
+								<div class=" col-md-8 col-xl-8">
+
+												<form method="POST" action="/user/post/store" enctype="multipart/form-data" id="articleForm">
+																@csrf
+
+																<div class="form-group ">
+																				<label class="text-white" for="post_category">What is the Category of your article</label>
+																				<h6 class="text-white"><small id="post_title_help" class="form-text text-light">This will determine
+																												where your article will be placed</small></h6>
+																				<select class="form-control  @error('post_category') is-invalid @enderror" name="post_category">
+																								<option disabled selected>Choose the article category</option>
+																								<option value="1">One</option>
+																								<option value="2">Two</option>
+																								<option value="3">Three</option>
+																				</select>
+
+																				@error('post_category')
+																								<span class="invalid-feedback bg-white p-1" role="alert">
+																												<strong>{{ $message }}</strong>
+																								</span>
+																				@enderror
+
+
+
+																</div>
+
+
+																<div class="form-group">
+																				<label class="text-white display-6" for="post_title">What is the Title of your article</label>
+																				<h6 class="text-white"><small id="article_title_help" class="form-text text-light">This will be
+																												visible to people who visit
+																												your site</small></h6>
+																				<input type="heading" name="post_title" class="form-control @error('post_title') is-invalid @enderror"
+																								id="post_title" aria-describedby="emailHelp" placeholder="Enter the Title of your article"
+																								value="{{ old('post_title') }}">
+																				@error('post_title')
+																								<span class="invalid-feedback bg-white p-1" role="alert">
+																												<strong>{{ $message }}</strong>
+																								</span>
+																				@enderror
+
+																</div>
+                                                                <div  class="form-group" id="trackingDiv" ></div>
+																<div class="form-group">
+																				<label class="text-white" for="exampleFormControlTextarea1">Create Your Article</label>
+
+																				<textarea name="post_body" class="textarea form-control @error('post_body') is-invalid @enderror" id="editor"
+                        rows="10">{{ old('post_body') }}</textarea>
+																				@error('post_body')
+																								<span class="invalid-feedback bg-white p-1" role="alert">
+																												<strong>{{ $message }}</strong>
+																								</span>
+																				@enderror
+																</div>
+
+																<div class="row">
+                                                                    <p><input type="submit" value="Submit"></p>
+																				{{-- <button type="button" class="btn btn-success m-2" onclick="myFunction()">Submit Article</button> --}}
+																				<button type="submit" class="btn btn-primary m-2">Preview Article</button>
+																</div>
+
+
+
+												</form>
+
+								</div>
+				</div>
+
+				</div>
+				<!-- CkEditor -->
+				{{-- CK-Editor --}}
+				{{-- <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script> --}}
+				{{-- <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script> --}}
+                <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
+
+				<script>
+				    ClassicEditor
+				        .create(document.querySelector('#editor'))
+				        .catch(error => {
+				            console.error(error);
+				        });
+
+				    timer = setInterval(updateDiv, 100);
+
+				    function updateDiv() {
+				        var editorText = ClassicEditor.instances.editorText;
+
+				        $('#trackingDiv').html(editorText);
+				    }
+				</script>
+
+				<script>
+				    function myFunction() {
+				       // document.getElementById('editor').value = ClassicEditor.getData();
+				        document.getElementById("articleForm").submit();
+				    }
+				</script>
+
+
+
+				<!-- Page specific javascripts-->
+
+
+
+
+
+				<script type="text/javascript" src="{{ asset('assets2/js/plugins/bootstrap-datepicker.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets2/js/plugins/select2.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets2/js/plugins/bootstrap-datepicker.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets2/js/plugins/dropzone.js') }}"></script>
+				<script type="text/javascript">
+				    $('#sl').on('click', function() {
+				        $('#tl').loadingBtn();
+				        $('#tb').loadingBtn({
+				            text: "Signing In"
+				        });
+				    });
+
+				    $('#el').on('click', function() {
+				        $('#tl').loadingBtnComplete();
+				        $('#tb').loadingBtnComplete({
+				            html: "Sign In"
+				        });
+				    });
+
+				    $('#demoDate').datepicker({
+				        format: "dd/mm/yyyy",
+				        autoclose: true,
+				        todayHighlight: true
+				    });
+
+				    $('#demoSelect').select2();
+				</script>
+@endsection

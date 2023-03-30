@@ -1,0 +1,33 @@
+.comment-cont {
+    background-color: rgb(241, 239, 239);
+    height: 50px;
+    color: rgb(0, 0, 0);
+
+  }
+
+  .hidden-div {
+    visibility: hidden;
+    background-color: rgb(241, 239, 239);
+    color: black;
+  }
+  .capture_image {
+    background-color: rgb(241, 239, 239);
+    height: auto;
+    width: auto;
+    max-height: 150px;
+    color: rgb(0, 0, 0);
+  }
+
+  @media (max-width: 1199px) {
+    .recomended_image {
+        background-color: rgb(241, 239, 239);
+        height: auto;
+        width: 150px !important;
+        max-height: 150px;
+        color: rgb(0, 0, 0);
+        background-size: cover;
+      }
+  }
+
+
+
