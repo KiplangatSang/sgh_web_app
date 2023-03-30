@@ -1,0 +1,11 @@
+# ---
+# deployment:
+#   tasks:
+#     - export DEPLOYPATH=/home/stormsco/SGH
+#     - /bin/cp -R * $DEPLOYPATH
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/stormsco/SGH
+    - /bin/cp -r * $DEPLOYPATH #copy all from root
+    - /bin/cp ./public/* /home/stormsco/public_html/new_sgh_public
