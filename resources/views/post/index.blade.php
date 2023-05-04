@@ -6,6 +6,17 @@
 								<div class="container">
 												<div class="row gx-4 gx-lg-5 ">
 																<div class="col-md-8 col-lg-7 col-xl-7">
+																				<!-- google ads-->
+																				<div class="row">
+																								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
+																												crossorigin="anonymous"></script>
+																								<!-- responsive-square -->
+																								<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
+																												data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
+																								<script>
+																												(adsbygoogle = window.adsbygoogle || []).push({});
+																								</script>
+																				</div>
 																				@foreach ($data['posts'] as $post)
 																								<!-- Post preview-->
 
@@ -18,28 +29,26 @@
 																								<!-- Divider-->
 																								<hr class="my-4" />
 																				@endforeach
-
-																				<div class="mx-auto d-flex justify-content-center">
-																								{{ $data['posts']->links() }}
-																				</div>
-
-																				<div class="col-md-2 col-xl-2 p-1">
-																								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5005358454303953"
+																				<!-- google ads-->
+																				<div class="row">
+																								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
 																												crossorigin="anonymous"></script>
-																								<!-- StormsAdd -->
-																								<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5005358454303953"
-																												data-ad-slot="8840350149" data-ad-format="auto" data-full-width-responsive="true"></ins>
+																								<!-- responsive-square -->
+																								<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
+																												data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
 																								<script>
 																												(adsbygoogle = window.adsbygoogle || []).push({});
 																								</script>
 																				</div>
 
-
+																				<div class="mx-auto d-flex justify-content-center">
+																								{{ $data['posts']->links() }}
+																				</div>
 																				<!-- Pager-->
 
 																</div>
 																<div class="col-md-4 col-lg-6 col-xl">
-																				{{-- {{dd($newsdata['recomended'])}} --}}
+
 																				<div class="col-md-2 col-xl-2 p-1">
 																								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5005358454303953"
 																												crossorigin="anonymous"></script>
@@ -82,18 +91,18 @@
 																								<div class="jumbotron p-3">
 																												<h3 class="text-info">Refresh to get new updates</h3>
 																								</div>
-																								<div class="col-md-2 col-xl-2 p-1">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5005358454303953"
-																																crossorigin="anonymous"></script>
-																												<!-- StormsAdd -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5005358454303953"
-																																data-ad-slot="8840350149" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
 																				@endif
-
+																				<!-- google ads-->
+																				<div class="row">
+																								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
+																												crossorigin="anonymous"></script>
+																								<!-- responsive-square -->
+																								<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
+																												data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
+																								<script>
+																												(adsbygoogle = window.adsbygoogle || []).push({});
+																								</script>
+																				</div>
 
 																</div>
 												</div>
