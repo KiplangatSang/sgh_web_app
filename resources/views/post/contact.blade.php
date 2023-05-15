@@ -27,24 +27,24 @@
 																																</div>
 																																<div class="form-floating">
 																																				<input class="form-control" id="email" name="email" type="email"
-																																								placeholder="Enter your email..." data-sb-validations="required,email"  required/>
+																																								placeholder="Enter your email..." data-sb-validations="required,email" required />
 																																				<label for="email">Email address</label>
-																																				<div class="invalid-feedback" data-sb-feedback="email:required" >An email is required.
+																																				<div class="invalid-feedback" data-sb-feedback="email:required">An email is required.
 																																				</div>
 																																				<div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
 																																</div>
 																																<div class="form-floating">
 																																				<input class="form-control" id="phone" name="phoneno" type="number"
-																																								placeholder="Enter your phone number..." data-sb-validations="required"  required />
+																																								placeholder="Enter your phone number..." data-sb-validations="required" required />
 																																				<label for="phone">Phone Number</label>
 																																				<div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is
 																																								required.</div>
 																																</div>
 																																<div class="form-floating">
 																																				<textarea class="form-control" id="message" name="message" placeholder="Enter your message here..."
-                                        style="height: 12rem" data-sb-validations="required" required ></textarea>
+																																				    style="height: 12rem" data-sb-validations="required" required></textarea>
 																																				<label for="message">Message</label>
-																																				<div class="invalid-feedback" data-sb-feedback="message:required" >A message is required.
+																																				<div class="invalid-feedback" data-sb-feedback="message:required">A message is required.
 																																				</div>
 																																</div>
 																																<br />
@@ -70,19 +70,19 @@
 																																<button class="btn btn-secondary text-uppercase " id="submitButton"
 																																				type="submit">Send</button>
 																												</form>
-                                                                                                                <br>
-                                                                                                                <br>
+																												<br>
+																												<br>
 
-                                                                                                                <div class="col-md-2 col-xl-2 p-1">
-                                                                                                                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5005358454303953"
-                                                                                                                                            crossorigin="anonymous"></script>
-                                                                                                                    <!-- StormsAdd -->
-                                                                                                                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5005358454303953"
-                                                                                                                                    data-ad-slot="8840350149" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                                                                                                                    <script>
-                                                                                                                        (adsbygoogle = window.adsbygoogle || []).push({});
-                                                                                                                    </script>
-                                                                                                    </div>
+																												<div class="col-md-2 col-xl-2 p-1">
+																																<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
+																																				crossorigin="anonymous"></script>
+																																<!-- responsive-square -->
+																																<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
+																																				data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
+																																<script>
+																																				(adsbygoogle = window.adsbygoogle || []).push({});
+																																</script>
+																												</div>
 																								</div>
 																				</div>
 																</div>
