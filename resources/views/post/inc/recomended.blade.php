@@ -9,7 +9,9 @@
                                     @endif
                                 </div>
 
-								<p class="meta"> <small>{{ $recomended->created_at->format('M d Y  H:II') }}</small>
+								<p class="meta">
+                                    <small>{{ $recomended->created_at->diffForHumans() }}</small>
+                                    {{--  <small>{{ $recomended->created_at->format('M d Y  H:II') }}</small>  --}}
 								</p>
 				</a>
 
