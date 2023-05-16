@@ -4,15 +4,27 @@
 								<!-- Page Header-->
 								<header class="masthead ">
 												<div class="container position-relative  px-lg ">
+																<div class="row">
+																				<!-- google ads-->
+																				<div class="row">
+																								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
+																												crossorigin="anonymous"></script>
+																								<!-- responsive-square -->
+																								<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
+																												data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
+																								<script>
+																												(adsbygoogle = window.adsbygoogle || []).push({});
+																								</script>
+																				</div>
+
+																</div>
 																<div class="row  gx-lg justify-content-center">
 																				<div class="col-md-10 col-xl-10 ">
 																								<div class="row ">
 																												<div class="d-flex justify-content-center m-2">
 																																<h1>{{ $postdata['post']->post_title }}</h1>
 																												</div>
-																												{{-- <div class="sub-heading d-flex justify-content-center m-1">
-                            <h5>{{ $postdata['post']->post_subtitle }}</h5>
-                    </div> --}}
+
 																												<div class="row d-flex justify-content-center mx-auto">
 																																@if ($postdata['post']->post_top_image != null)
 																																				@php
@@ -66,6 +78,20 @@
 																				</div>
 																</div>
 																<div class="row">
+																				<!-- google ads-->
+																				<div class="row">
+																								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
+																												crossorigin="anonymous"></script>
+																								<!-- responsive-square -->
+																								<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
+																												data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
+																								<script>
+																												(adsbygoogle = window.adsbygoogle || []).push({});
+																								</script>
+																				</div>
+
+																</div>
+																<div class="row">
 																				<div class="col-md-4 col-lg-7 col-xl p-5">
 																								<hr>
 																								@if (count($postdata['newposts']) > 0)
@@ -105,6 +131,34 @@
 																								</div>
 
 																				</div>
+																</div>
+																<div class="row">
+																				<!-- google ads-->
+																				<div class="row">
+																								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
+																												crossorigin="anonymous"></script>
+																								<!-- responsive-square -->
+																								<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
+																												data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
+																								<script>
+																												(adsbygoogle = window.adsbygoogle || []).push({});
+																								</script>
+																				</div>
+
+																</div>
+																<div class="row">
+																				<!-- google ads-->
+																				<div class="row">
+																								<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
+																												crossorigin="anonymous"></script>
+																								<!-- responsive-square -->
+																								<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
+																												data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
+																								<script>
+																												(adsbygoogle = window.adsbygoogle || []).push({});
+																								</script>
+																				</div>
+
 																</div>
 
 								</article>
