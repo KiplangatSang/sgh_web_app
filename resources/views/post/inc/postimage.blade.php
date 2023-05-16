@@ -12,7 +12,7 @@
 				<h6 class="meta"> <small>
 												Story by
 												<a href="#!" class="text-info">{{ $post->postable()->first()->name }}</a>
-												on {{ $post->created_at->diffForHumans() }}</small>
+												about {{ $post->created_at->diffForHumans() }}</small>
                                                 {{--  on {{ $post->created_at->format('D M Y  H:II') . ' hrs' }}</small>  --}}
 				</h6>
 
