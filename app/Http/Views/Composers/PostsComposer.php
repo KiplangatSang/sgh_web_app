@@ -17,7 +17,11 @@ class PostsComposer
             ->where("status", true)
             ->simplePaginate(20);
 
-        $recomended = Posts::inRandomOrder()->simplePaginate(30);
+        $recomended = Posts::inRandomOrder()
+            ->where("post_publish_status", true)
+            ->where("is_suspended", false)
+            ->where("status", true)
+            ->simplePaginate(30);
         foreach ($posts as $post) {
             $post['artist'] = $post->postable()->first()->get(
                 'id',
