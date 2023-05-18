@@ -28,8 +28,6 @@ class CreatePostsTable extends Migration
             $table->string('post_date_published')->nullable();
             $table->boolean('post_regulation')->nullable();
             $table->boolean('post_publish_status')->default(false);
-            $table->boolean('is_suspended')->default(false);
-            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
