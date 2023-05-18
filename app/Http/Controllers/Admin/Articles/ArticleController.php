@@ -92,7 +92,7 @@ class ArticleController extends Controller
         if (!$result)
             return back()->with('error', "The post article could not be updated");
 
-        return redirect(route('admin.articles.show',['article'=>$id]))->with('success', "The post article has updated successfully");
+        return back()->with('success', "The post article has updated successfully");
     }
 
     /**
