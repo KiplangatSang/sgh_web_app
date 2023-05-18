@@ -170,53 +170,31 @@ Route::prefix('/admin')->name('admin.')->middleware(['admin',])->group(
     function () {
         Route::resource('categories', CategoryController::class);
 
-        Route::get('/articles/category/index', [CategoryController::class, 'index']);
-        Route::get('/articles/category/create', [CategoryController::class, 'create']);
-        Route::post('/articles/category/store', [CategoryController::class, 'store']);
-        Route::get('/articles/category/show/{id}', [CategoryController::class, 'show']);
-        Route::get('/articles/category/edit/{id}', [CategoryController::class, 'edit']);
-        Route::get('/articles/category/update/{id}', [CategoryController::class, 'update']);
-        Route::get('/articles/category/delete/{id}', [CategoryController::class, 'destroy']);
+        // Route::post('/articles/category/store', [CategoryController::class, 'store']);
+        // Route::get('/articles/category/show/{id}', [CategoryController::class, 'show']);
+        // Route::get('/articles/category/edit/{id}', [CategoryController::class, 'edit']);
+        // Route::get('/articles/category/update/{id}', [CategoryController::class, 'update']);
+        // Route::get('/articles/category/delete/{id}', [CategoryController::class, 'destroy']);
 
         //articles
         //post images
-        Route::get('/articles/index', [ArticleController::class, 'index']);
-        Route::get('/articles/create', [ArticleController::class, 'create']);
-        Route::post('/articles/store', [ArticleController::class, 'store']);
-        Route::get('/articles/show/{id}', [ArticleController::class, 'show']);
-        Route::get('/articles/edit/{id}', [ArticleController::class, 'edit']);
-        Route::get('/articles/update/{id}', [ArticleController::class, 'update']);
-        Route::get('/articles/delete/{id}', [ArticleController::class, 'destroy']);
+        Route::resource('articles', ArticleController::class);
+
+        // Route::get('/articles/index', [ArticleController::class, 'index']);
+        // Route::get('/articles/create', [ArticleController::class, 'create']);
+        // Route::post('/articles/store', [ArticleController::class, 'store']);
+        // Route::get('/articles/show/{id}', [ArticleController::class, 'show']);
+        // Route::get('/articles/edit/{id}', [ArticleController::class, 'edit']);
+        // Route::get('/articles/update/{id}', [ArticleController::class, 'update']);
+        // Route::get('/articles/delete/{id}', [ArticleController::class, 'destroy']);
 
         //pending articles
-        Route::get('/articles/pending/index', [PendingArticleController::class, 'index']);
-        Route::get('/articles/pending/create', [PendingArticleController::class, 'create']);
-        Route::post('/articles/pending/store', [PendingArticleController::class, 'store']);
-        Route::get('/articles/pending/show/{id}', [PendingArticleController::class, 'show']);
-        Route::get('/articles/pending/edit/{id}', [PendingArticleController::class, 'edit']);
-        Route::get('/articles/pending/update/{id}', [PendingArticleController::class, 'update']);
-        Route::get('/articles/pending/delete/{id}', [PendingArticleController::class, 'destroy']);
+        Route::resource('pendingarticles', PendingArticleController::class);
 
         //published articles
-        Route::get('/articles/published/index', [PublishedArticleController::class, 'index']);
-        Route::get('/articles/published/create', [PublishedArticleController::class, 'create']);
-        Route::post('/articles/published/store', [PublishedArticleController::class, 'store']);
-        Route::get('/articles/published/show/{id}', [PublishedArticleController::class, 'show']);
-        Route::get('/articles/published/edit/{id}', [PublishedArticleController::class, 'edit']);
-        Route::get('/articles/published/update/{id}', [PublishedArticleController::class, 'update']);
-        Route::get('/articles/published/delete/{id}', [PublishedArticleController::class, 'destroy']);
-
-        //articlesProcessing
-        Route::get('/articles/process/index', [ArticleProcessingController::class, 'index']);
-        Route::get('/articles/process/create', [ArticleProcessingController::class, 'create']);
-        Route::post('/articles/process/store', [ArticleProcessingController::class, 'store']);
-        Route::get('/articles/process/show/{id}', [ArticleProcessingController::class, 'show']);
-        Route::get('/articles/process/edit/{id}', [ArticleProcessingController::class, 'edit']);
-        Route::get('/articles/process/update/{id}', [ArticleProcessingController::class, 'update']);
-        Route::get('/articles/process/delete/{id}', [ArticleProcessingController::class, 'destroy']);
+        Route::resource('publishedarticles', PublishedArticleController::class);
 
         //Users
-
         Route::get('/account/users/index', [AccountController::class, 'index']);
         Route::get('/account/users/create', [AccountController::class, 'create']);
         Route::post('/account/users/store', [AccountController::class, 'store']);

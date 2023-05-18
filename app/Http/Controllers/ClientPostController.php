@@ -49,8 +49,18 @@ class ClientPostController extends Controller
      */
     public function show($post_id)
     {
-        $postdata['post']= Posts::where('post_id', $post_id)->first();
-        $newposts = Posts::orderBy('created_at', 'DESC')->simplePaginate(10);
+        $postdata['post']= Posts::where('post_id', $post_id)
+        ->where("post_publish_status", true)
+        ->where("is_suspended", false)
+        ->where("status", true)
+        ->first();
+
+
+        $newposts = Posts::orderBy('created_at', 'DESC')
+        ->where("post_publish_status", true)
+        ->where("is_suspended", false)
+        ->where("status", true)
+        ->simplePaginate(10);
 
         foreach ($newposts as $post) {
             if($post->post_top_image )

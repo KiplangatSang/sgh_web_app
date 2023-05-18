@@ -221,7 +221,7 @@ class PostController extends Controller
         // $post_top_image = $user->postImages()->whereNotNull('post_top_image')
         //     ->take(2)
         //     ->get('post_top_image') ?? $post->post_top_image;
-            $post_top_image = json_encode(session('image_title'));
+        $post_top_image = json_encode(session('image_title'));
 
         try {
 

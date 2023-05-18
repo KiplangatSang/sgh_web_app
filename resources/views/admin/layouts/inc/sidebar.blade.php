@@ -26,10 +26,11 @@
 																				class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Articles</span><i
 																				class="treeview-indicator fa fa-angle-right"></i></a>
 												<ul class="treeview-menu">
-																<li><a class="treeview-item " href="/admin/articles/index"><i class="icon fa fa-circle-o"></i>All
+																<li><a class="treeview-item " href="{{ route('admin.articles.index') }}"><i
+																												class="icon fa fa-circle-o"></i>All
 																								Articles
 																				</a></li>
-																<li><a class="treeview-item " href="/admin/articles/pending/index"><i
+																<li><a class="treeview-item " href="{{ route('admin.pendingarticles.index') }}"><i
 																												class="icon fa fa-circle-o"></i>Pending
 																								Articles</a></li>
 

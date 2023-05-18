@@ -17,16 +17,16 @@ class ArticleController extends Controller
     public function index()
     {
         //
-       // $user = User::whereIn('id',auth()->user())->first();
+        // $user = User::whereIn('id',auth()->user())->first();
 
-        $posts = Posts::orderBy('created_at','DESC')->get();
+        $posts = Posts::orderBy('created_at', 'DESC')->get();
 
 
         $postdata = array();
         $postdata['posts'] = $posts;
         //dd($data);
 
-        return view('admin.articles.index',compact('postdata'));
+        return view('admin.articles.index', compact('postdata'));
     }
 
     /**
@@ -82,6 +82,16 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $post = Posts::where('id', $id)->first();
+
+        $result =  $post->update(
+            $request->all(),
+        );
+
+        if (!$result)
+            return back()->with('error', "The post article could not be updated");
+
+        return redirect(route('admin.articles.index'))->with('success', "The post article has updated successfully");
     }
 
     /**
