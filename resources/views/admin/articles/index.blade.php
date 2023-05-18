@@ -3,12 +3,10 @@
 				<div class="row p-3 mx-aut">
 								<div class="col-lg-4  col-xl-4 mt-2">
 												<div class="tile">
-
-
 																<div class="tile-body">
-																				<div class="tile ">
+																				<div class="card-body">
 																								<div class="row">
-																												<h4>My Posts</h4>
+																												<h4>Posts</h4>
 
 																												<h5 class="display-5  mt-1 ml-2 text-info">{{ count($postdata['posts']) }} Posts</h5>
 																								</div>
@@ -28,70 +26,74 @@
 																@foreach ($postdata['posts'] as $post)
 																				<div class="tile post-div mt-2">
 																								<a href="/{{ $post->post_id }}" class="btn btn-secondary">View in web</a>
+																								<a href="{{ route('admin.articles.show', ['article' => $post->id]) }}"
+																												class="btn btn-info">Show</a>
 
 																								@if (!$post->is_suspended)
-																												<a onclick="event.preventDefault(); document.getElementById('suspend-form').submit();"
+																												<a onclick="event.preventDefault(); document.getElementById('suspend-form{{ $post->id }}').submit();"
 																																class="btn btn-danger">Suspend</a>
 																												<div class="d-none">
 																																<form action="{{ route('admin.articles.update', ['article' => $post->id]) }}" method="POST"
-																																				id="suspend-form">
+																																				id="suspend-form{{ $post->id }}">
 																																				@csrf
 																																				@method('PUT')
 																																				<input type="text" name="is_suspended" value="1">
 																																</form>
 																												</div>
 																								@else
-																												<a onclick="event.preventDefault(); document.getElementById('suspend-form').submit();"
+																												<a onclick="event.preventDefault(); document.getElementById('suspend-form{{ $post->id }}').submit();"
 																																class="btn btn-info">Unsuspend</a>
 																												<div class="d-none">
 																																<form action="{{ route('admin.articles.update', ['article' => $post->id]) }}" method="POST"
-																																				id="suspend-form">
+																																				id="suspend-form{{ $post->id }}">
 																																				@csrf
 																																				@method('PUT')
 																																				<input type="text" name="is_suspended" value="0">
 																																</form>
 																												</div>
 																								@endif
-																								@if (!$post->status)
-																												<a onclick="event.preventDefault(); document.getElementById('status-form').submit();"
-																																class="btn btn-primary">Activate</a>
-																												<div class="d-none">
-																																<form action="{{ route('admin.articles.update', ['article' => $post->id]) }}" method="POST"
-																																				id="status-form">
-																																				@csrf
-																																				@method('PUT')
-																																				<input type="text" name="status" value="1">
-																																</form>
-																												</div>
-																								@else
-																												<a onclick="event.preventDefault(); document.getElementById('status-form').submit();"
-																																class="btn btn-danger">Deactivate</a>
-																												<div class="d-none">
-																																<form action="{{ route('admin.articles.update', ['article' => $post->id]) }}" method="POST"
-																																				id="status-form">
-																																				@csrf
-																																				@method('PUT')
-																																				<input type="text" name="status" value="0">
-																																</form>
-																												</div>
-																								@endif
+                                                                                                @if (!$post->status)
+                                                                                                <a onclick="event.preventDefault(); document.getElementById('status-form{{ $post->id }}').submit();"
+                                                                                                                class="btn btn-primary">Activate</a>
+                                                                                                <div class="d-none">
+                                                                                                                <form action="{{ route('admin.articles.update', ['article' => $post->id]) }}" method="POST"
+                                                                                                                                id="status-form{{ $post->id }}">
+                                                                                                                                @csrf
+                                                                                                                                @method('PUT')
+                                                                                                                                <input type="text" name="status" value="1">
+                                                                                                                </form>
+                                                                                                </div>
+                                                                                                @else
+                                                                                                <a onclick="event.preventDefault(); document.getElementById('status-form{{ $post->id }}').submit();"
+                                                                                                                class="btn btn-danger">Deactivate</a>
+                                                                                                <div class="d-none">
+                                                                                                                <form action="{{ route('admin.articles.update', ['article' => $post->id]) }}" method="POST"
+                                                                                                                                id="status-form{{ $post->id }}">
+                                                                                                                                @csrf
+                                                                                                                                @method('PUT')
+                                                                                                                                <input type="text" name="status" value="0">
+                                                                                                                </form>
+                                                                                                </div>
+                                                                                                @endif
 																								@if (!$post->post_publish_status)
-																												<a onclick="event.preventDefault(); document.getElementById('publish-form').submit();"
+																												<a onclick="event.preventDefault(); document.getElementById('publish-form{{ $post->id }}').submit();"
 																																class="btn btn-success">Publish</a>
 																												<div class="d-none">
 																																<form action="{{ route('admin.articles.update', ['article' => $post->id]) }}" method="POST"
-																																				id="publish-form">
+																																				id="publish-form{{ $post->id }}">
 																																				@csrf
 																																				@method('PUT')
 																																				<input type="text" name="post_publish_status" value="1">
+																																				<input type="text" name="post_publish_status_by" value="{{ auth()->id() }}">
+
 																																</form>
 																												</div>
 																								@else
-																												<a onclick="event.preventDefault(); document.getElementById('publish-form').submit();"
+																												<a onclick="event.preventDefault(); document.getElementById('publish-form{{ $post->id }}').submit();"
 																																class="btn btn-danger">DePublish</a>
 																												<div class="d-none">
-																																<form action="{{ route('admin.articles.update', ['article' => $post->id]) }}" method="POST"
-																																				id="publish-form">
+																																<form action="{{ route('admin.articles.update', ['article' => $post->id]) }}"
+																																				method="POST" id="publish-form{{ $post->id }}">
 																																				@csrf
 																																				@method('PUT')
 																																				<input type="text" name="post_publish_status" value="0">

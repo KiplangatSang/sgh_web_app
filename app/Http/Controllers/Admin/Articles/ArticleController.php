@@ -19,12 +19,10 @@ class ArticleController extends Controller
         //
         // $user = User::whereIn('id',auth()->user())->first();
 
-        $posts = Posts::orderBy('created_at', 'DESC')->get();
-
+        $posts = Posts::orderBy('created_at', 'DESC')->simplePaginate(config('app.posts_pagination'));
 
         $postdata = array();
         $postdata['posts'] = $posts;
-        //dd($data);
 
         return view('admin.articles.index', compact('postdata'));
     }
@@ -59,6 +57,9 @@ class ArticleController extends Controller
     public function show($id)
     {
         //
+        $post = Posts::where('id', $id)->first();
+        $postdata = array();
+        return view('admin.articles.show', compact('post'));
     }
 
     /**
@@ -91,7 +92,7 @@ class ArticleController extends Controller
         if (!$result)
             return back()->with('error', "The post article could not be updated");
 
-        return redirect(route('admin.articles.index'))->with('success', "The post article has updated successfully");
+        return redirect(route('admin.articles.show',['article'=>$id]))->with('success', "The post article has updated successfully");
     }
 
     /**

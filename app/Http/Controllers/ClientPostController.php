@@ -49,26 +49,29 @@ class ClientPostController extends Controller
      */
     public function show($post_id)
     {
-        $postdata['post']= Posts::where('post_id', $post_id)
-        ->where("post_publish_status", true)
-        ->where("is_suspended", false)
-        ->where("status", true)
-        ->first();
+        if (auth()->user()->isAdmin ||  auth()->user()->role == 1) {
+            $postdata['post'] = Posts::where('post_id', $post_id)
+                ->first();
+        } else {
+            $postdata['post'] = Posts::where('post_id', $post_id)
+                ->where("post_publish_status", true)
+                ->where("is_suspended", false)
+                ->where("status", true)
+                ->first();
+        }
 
 
         $newposts = Posts::orderBy('created_at', 'DESC')
-        ->where("post_publish_status", true)
-        ->where("is_suspended", false)
-        ->where("status", true)
-        ->simplePaginate(10);
+            ->where("post_publish_status", true)
+            ->where("is_suspended", false)
+            ->where("status", true)
+            ->simplePaginate(config('app.recommended_pagination'));
 
         foreach ($newposts as $post) {
-            if($post->post_top_image )
-            $post->post_top_image = json_decode($post->post_top_image);
+            if ($post->post_top_image)
+                $post->post_top_image = json_decode($post->post_top_image);
             else
-            $post->post_top_image = null;
-
-
+                $post->post_top_image = null;
         }
         $postdata['newposts'] = $newposts;
         $post_top_image = array();
