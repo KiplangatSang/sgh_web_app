@@ -12,17 +12,6 @@
 								</ul>
 				</div>
 				<div class="row">
-								@if (session()->has('message'))
-												<div class="container-fluid alert alert-danger">
-																{{ session()->get('message') }}
-												</div>
-								@endif
-
-								@if (session()->has('success'))
-												<div class="container-fluid alert alert-success">
-																{{ session()->get('success') }}
-												</div>
-								@endif
 								<div class="col ">
 												<div class="tile col ">
 
@@ -42,20 +31,65 @@
 																				</div>
 																				<div class="app-sidebar__user col-md-8">
 																								<div class="tile-body row d-flex justify-content-center">
+																												@if (!$accountsdata['account']->isAdmin)
+																																<a onclick="event.preventDefault(); document.getElementById('admin-form').submit();"
+																																				class="btn btn-success mr-3">Set Admin</a>
+																																<div class="d-none">
+																																				<form
+																																								action="{{ route('admin.useraccounts.update', ['useraccount' => $accountsdata['account']->id]) }}"
+																																								method="POST" id="admin-form">
+																																								@csrf
+																																								@method('PUT')
+																																								<input type="text" name="isAdmin" value="1">
+																																				</form>
+																																</div>
+																												@else
+																																<a onclick="event.preventDefault(); document.getElementById('admin-form').submit();"
+																																				class="btn btn-danger mr-3">Unset admin</a>
+																																<div class="d-none">
+																																				<form
+																																								action="{{ route('admin.useraccounts.update', ['useraccount' => $accountsdata['account']->id]) }}"
+																																								method="POST" id="admin-form">
+																																								@csrf
+																																								@method('PUT')
+																																								<input type="text" name="isAdmin" value="0">
+																																				</form>
+																																</div>
+																												@endif
 
 																												<a class="mr-3"
-																																href="/employee/updateEmployee/{{ $accountsdata['account']->id }}"><button
-																																				class="btn btn-primary"> Update account
-																																</button></a>
-																												<a class="mr-3" href="#"><button class="btn btn-success "> Show Sales
+																																href="{{ route('admin.useraccounts.userarticles.index', ['useraccount' => $accountsdata['account']->id]) }}"><button
+																																				class="btn btn-success "> Show Articles
 																																</button></a>
 
-																												<a class="mr-3" href="/admin/account/suspend/edit/{{ $accountsdata['account']->id}}"><button class="btn btn-info "> Suspend Account
-																																</button></a>
-																												<a class="mr-3"
-																																href="/admin/account/users/delete/{{ $accountsdata['account']->id }}"><button
+																												@if (!$accountsdata['account']->isSuspended)
+																																<a onclick="event.preventDefault(); document.getElementById('suspend-form').submit();"
+																																				class="btn btn-danger mr-3">Suspend</a>
+																																<div class="d-none">
+																																				<form
+																																								action="{{ route('admin.useraccounts.update', ['useraccount' => $accountsdata['account']->id]) }}"
+																																								method="POST" id="suspend-form">
+																																								@csrf
+																																								@method('PUT')
+																																								<input type="text" name="isSuspended" value="1">
+																																				</form>
+																																</div>
+																												@else
+																																<a onclick="event.preventDefault(); document.getElementById('suspend-form').submit();"
+																																				class="btn btn-info mr-3">Unsuspend</a>
+																																<div class="d-none">
+																																				<form
+																																								action="{{ route('admin.useraccounts.update', ['useraccount' => $accountsdata['account']->id]) }}"
+																																								method="POST" id="suspend-form">
+																																								@csrf
+																																								@method('PUT')
+																																								<input type="text" name="isSuspended" value="0">
+																																				</form>
+																																</div>
+																												@endif
+																												{{--  <a class="mr-3" href="/admin/account/users/delete/{{ $accountsdata['account']->id }}"><button
 																																				class="btn btn-danger "> Delete Account
-																																</button></a>
+																																</button></a>  --}}
 																								</div>
 
 																				</div>
@@ -83,13 +117,21 @@
 																								<div class="row">
 																												<h5 class="dispalay-4 text-muted mr-3">Account Status</h5>
 																												@if ($accountsdata['account']->isSuspended)
-																																<h5 class="dispalay-3 ">Suspended</h5>
+																																<h5 class="dispalay-3 "><span class="badge badge-danger">Suspended</span> </h5>
 																												@else
-																																<h5 class="dispalay-3 ">Active</h5>
+																																<h5 class="dispalay-3 "><span class="badge badge-success">Active</span></h5>
 																												@endif
 
 
 
+																								</div>
+																								<div class="row">
+																												<h5 class="dispalay-4 text-muted mr-3">Account Status</h5>
+																												@if ($accountsdata['account']->isAdmin)
+																																<h5 class="dispalay-3 "><span class="badge badge-info">Admin</span> </h5>
+																												@elseif ($accountsdata['account']->role == 1)
+																																<h5 class="dispalay-3 "><span class="badge badge-success">Author</span></h5>
+																												@endif
 																								</div>
 
 																				</div>

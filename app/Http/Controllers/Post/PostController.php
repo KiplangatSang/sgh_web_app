@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Post;
 
 use App\Models\Articles\Categories;
 use App\Http\Controllers\Controller;
-use App\posts\comments;
 use App\Models\Posts\Posts;
 use App\Models\User;
 

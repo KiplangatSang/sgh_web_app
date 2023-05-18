@@ -77,16 +77,13 @@
 																																								<td>
 																																												{{ $account->email }}
 																																								</td>
-
-																																								@if ($account->isSuspended)
-																																												<td>
-																																																Suspended
-																																												</td>
-																																								@else
-																																												<td>
-																																																Active
-																																												</td>
-																																								@endif
+																																								<td>
+																																												@if ($account->isSuspended)
+																																																<span class="badge badge-danger">Suspended</span>
+																																												@else
+																																																<span class="badge badge-success">Active</span>
+																																												@endif
+																																								</td>
 
 																																								<td>
 																																												{{ $account->email_verified_at }}
@@ -95,7 +92,7 @@
 																																												{{ $account->created_at }}
 
 																																								</td>
-																																								<td><a href="/admin/account/users/show/{{ $account->id }}"><i
+																																								<td><a href="{{ route('admin.useraccounts.show', ['useraccount' => $account->id]) }}"><i
 																																																				class="fa fa-eye ">
 																																																				View</i></a></td>
 																																								</a>

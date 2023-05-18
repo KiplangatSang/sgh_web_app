@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Articles\PublishedArticleController;
 use App\Http\Controllers\Admin\Categories\CategoryController;
 use App\Http\Controllers\Admin\Users\AccountController;
 use App\Http\Controllers\Admin\Users\AccountSuspensionController;
+use App\Http\Controllers\Admin\Users\ArticleController as UsersArticleController;
 use App\Http\Controllers\Client\ResponseController;
 use App\Http\Controllers\ClientPostController;
 use App\Http\Controllers\HomeController;
@@ -23,15 +24,8 @@ use App\Http\Controllers\Posts\PoemController;
 use App\Http\Controllers\Posts\SportController;
 use App\Http\Controllers\Posts\TechCotroller;
 use App\Http\Controllers\Settings\SettingController;
-use App\Http\Controllers\SiteVisitController;
-use App\Models\Posts\Posts;
-use App\Models\SiteVisits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 
 
 /*
@@ -80,7 +74,7 @@ Route::get('/authors/signup', function () {
 });
 
 Route::get('/', function () {
-//    return Categories::all();
+    //    return Categories::all();
     return view('post.index');
 });
 
@@ -92,7 +86,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
 
 
 //post articles
-//Route::get('/users/posts/index', [ClientPostController::class, 'index']);
 Route::get('/articles/index', function () {
     return view('post.index');
 });
@@ -156,7 +149,6 @@ Route::post('/post/image/title/store/{post_id}', [PostImageController::class, 's
 
 //settings
 Route::get('/user/settings/index', [SettingController::class, 'index']);
-Route::get('firebase', 'FirebaseController@index');
 
 Route::post('/post/image/firebase', [PostImageController::class, 'uploadImageToFirebase']);
 
@@ -170,23 +162,9 @@ Route::prefix('/admin')->name('admin.')->middleware(['admin',])->group(
     function () {
         Route::resource('categories', CategoryController::class);
 
-        // Route::post('/articles/category/store', [CategoryController::class, 'store']);
-        // Route::get('/articles/category/show/{id}', [CategoryController::class, 'show']);
-        // Route::get('/articles/category/edit/{id}', [CategoryController::class, 'edit']);
-        // Route::get('/articles/category/update/{id}', [CategoryController::class, 'update']);
-        // Route::get('/articles/category/delete/{id}', [CategoryController::class, 'destroy']);
-
         //articles
         //post images
         Route::resource('articles', ArticleController::class);
-
-        // Route::get('/articles/index', [ArticleController::class, 'index']);
-        // Route::get('/articles/create', [ArticleController::class, 'create']);
-        // Route::post('/articles/store', [ArticleController::class, 'store']);
-        // Route::get('/articles/show/{id}', [ArticleController::class, 'show']);
-        // Route::get('/articles/edit/{id}', [ArticleController::class, 'edit']);
-        // Route::get('/articles/update/{id}', [ArticleController::class, 'update']);
-        // Route::get('/articles/delete/{id}', [ArticleController::class, 'destroy']);
 
         //pending articles
         Route::resource('pendingarticles', PendingArticleController::class);
@@ -194,24 +172,14 @@ Route::prefix('/admin')->name('admin.')->middleware(['admin',])->group(
         //published articles
         Route::resource('publishedarticles', PublishedArticleController::class);
 
-        //Users
-        Route::get('/account/users/index', [AccountController::class, 'index']);
-        Route::get('/account/users/create', [AccountController::class, 'create']);
-        Route::post('/account/users/store', [AccountController::class, 'store']);
-        Route::get('/account/users/show/{id}', [AccountController::class, 'show']);
-        Route::get('/account/users/edit/{id}', [AccountController::class, 'edit']);
-        Route::get('/account/users/update/{id}', [AccountController::class, 'update']);
-        Route::get('/account/users/delete/{id}', [AccountController::class, 'destroy']);
+        //user accounts
+        Route::resource('/useraccounts', AccountController::class);
 
+        //user accounts articles
+        Route::resource('useraccounts.userarticles', UsersArticleController::class);
 
         //Account Suspension
-        Route::get('/account/suspend/index', [AccountSuspensionController::class, 'index']);
-        Route::get('/account/suspend/create', [AccountSuspensionController::class, 'create']);
-        Route::post('/account/suspend/store', [AccountSuspensionController::class, 'store']);
-        Route::get('/account/suspend/show/{id}', [AccountSuspensionController::class, 'show']);
-        Route::get('/account/suspend/edit/{id}', [AccountSuspensionController::class, 'edit']);
-        Route::get('/account/suspend/update/{id}', [AccountSuspensionController::class, 'update']);
-        Route::get('/account/suspend/delete/{id}', [AccountSuspensionController::class, 'destroy']);
+        Route::resource('/suspendeduseraccounts', AccountSuspensionController::class);
     }
 );
 

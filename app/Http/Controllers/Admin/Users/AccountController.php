@@ -29,7 +29,7 @@ class AccountController extends Controller
         $admin = User::where('isAdmin', true)->get();
 
         $accountsdata = array();
-        $accountsdata['accounts'] =$account;
+        $accountsdata['accounts'] = $account;
         $accountsdata['suspended'] = $suspended;
         $accountsdata['active'] = $active;
         $accountsdata['admin'] = $admin;
@@ -107,18 +107,18 @@ class AccountController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data = $request->only(['isSuspended', 'isAdmin', 'isAuthor', 'role']);
         //
-        $user = User::where('id',$id)->update(
-            [
-                'isSuspended' => false,
-            ]
-            );
 
+        $user = User::where('id', $id)->first();
+        $result = $user->update(
+            $request->all(),
+        );
 
-          //  dd($user);
+        if (!$result)
+            return back()->with('error', 'Account could not be updated');
 
-
-        return back()->with('success', 'Account Updated ');
+        return back()->with('success', 'Account has been updated successfully');
     }
 
     /**
@@ -130,8 +130,10 @@ class AccountController extends Controller
     public function destroy($id)
     {
         //
-        User::destroy($id);
+        $result =  User::destroy($id);
 
+        if (!$result)
+            return back()->with('error', 'Account could not be deleted');
         return redirect('/admin/account/users/index')->with('success', 'Account Deleted ');
     }
 }

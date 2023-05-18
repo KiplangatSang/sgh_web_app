@@ -54,10 +54,11 @@
 																				class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Article
 																				Writers</span><i class="treeview-indicator fa fa-angle-right"></i></a>
 												<ul class="treeview-menu">
-																<li><a class="treeview-item " href="/admin/account/users/index"><i class="icon fa fa-circle-o"></i>
+																<li><a class="treeview-item " href="{{ route('admin.useraccounts.index') }}"><i
+																												class="icon fa fa-circle-o"></i>
 																								Published Writers
 																				</a></li>
-																<li><a class="treeview-item " href="/admin/account/suspend/index"><i
+																<li><a class="treeview-item " href="{{ route('admin.suspendeduseraccounts.index') }}"><i
 																												class="icon fa fa-circle-o"></i>Suspended</a></li>
 
 												</ul>

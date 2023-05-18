@@ -28,7 +28,7 @@ Route::get('/user/home', function (Request $request) {
 
 //Route::middleware('auth:api')->get('/user/post/get-posts', [Api\User\PostController::class, 'index']);
 
-Route::middleware('auth:api')->get('/user/post/get-post/{id}', [PostController::class, 'index']);
+// Route::middleware('auth:api')->get('/user/post/get-post/{id}', [PostController::class, 'index']);
 
-Route::get('/user/post/get-posts', 'Api\User\PostController@index')->name('posts');
+// Route::get('/user/post/get-posts', 'Api\User\PostController@index')->name('posts');
 
