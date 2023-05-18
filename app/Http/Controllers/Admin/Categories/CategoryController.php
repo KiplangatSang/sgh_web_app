@@ -78,7 +78,7 @@ class CategoryController extends Controller
 
 
 
-        return redirect('/admin/articles/category/index')->with('success', 'Category added successfully');
+        return redirect(route('admin.categories.index'))->with('success', 'Category added successfully');
     }
 
     /**
@@ -150,7 +150,7 @@ class CategoryController extends Controller
         if (!$result)
             return back()->with('error', "Category could not be added ");
 
-        return redirect('/admin/articles/category/index')->with('success', 'Category Updated successfully');
+        return redirect(route('admin.categories.index'))->with('success', 'Category Updated successfully');
     }
 
     /**

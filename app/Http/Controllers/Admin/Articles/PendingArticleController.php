@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin\Articles;
 
 use App\Http\Controllers\Controller;
+use App\Models\Posts\Posts;
 use Illuminate\Http\Request;
 
 class PendingArticleController extends Controller
 {
+    //
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +17,18 @@ class PendingArticleController extends Controller
     public function index()
     {
         //
+        // $user = User::whereIn('id',auth()->user())->first();
+
+        $posts = Posts::orderBy('created_at', 'DESC')
+            ->where("post_publish_status", false)
+            ->orWhere("is_suspended", true)
+            ->orWhere("status", false)
+            ->simplePaginate(config('app.posts_pagination'));
+
+        $postdata = array();
+        $postdata['posts'] = $posts;
+
+        return view('admin.articles.index', compact('postdata'));
     }
 
     /**
@@ -47,6 +61,9 @@ class PendingArticleController extends Controller
     public function show($id)
     {
         //
+        $post = Posts::where('id', $id)->first();
+        $postdata = array();
+        return view('admin.articles.show', compact('post'));
     }
 
     /**
@@ -70,6 +87,16 @@ class PendingArticleController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $post = Posts::where('id', $id)->first();
+
+        $result =  $post->update(
+            $request->all(),
+        );
+
+        if (!$result)
+            return back()->with('error', "The post article could not be updated");
+
+        return back()->with('success', "The post article has updated successfully");
     }
 
     /**

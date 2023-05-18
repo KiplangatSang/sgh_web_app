@@ -38,7 +38,7 @@
 								</li>
 
 								<li class="treeview"><a class="app-menu__item " href="#" data-toggle="treeview"><i
-																				class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Articles
+																				class="app-menu__icon fa fa-square"></i><span class="app-menu__label">Articles
 																				Cartegory</span><i class="treeview-indicator fa fa-angle-right"></i></a>
 												<ul class="treeview-menu">
 																<li><a class="treeview-item " href="{{ route('admin.categories.index') }}"><i
@@ -51,7 +51,7 @@
 												</ul>
 								</li>
 								<li class="treeview"><a class="app-menu__item " href="#" data-toggle="treeview"><i
-																				class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Article
+																				class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Article
 																				Writers</span><i class="treeview-indicator fa fa-angle-right"></i></a>
 												<ul class="treeview-menu">
 																<li><a class="treeview-item " href="{{ route('admin.useraccounts.index') }}"><i

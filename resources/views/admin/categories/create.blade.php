@@ -23,7 +23,7 @@
 												</div>
 								</div>
 								<div class=" col-md-8 col-xl-8 tile">
-												<form method="POST" action="/admin/articles/category/store" enctype="multipart/form-data" id="articleForm">
+												<form method="POST" action="{{ route('admin.categories.store') }}" enctype="multipart/form-data" id="articleForm">
 																@csrf
 																<div class="form-group ">
 																				<label for="category_class">Choose the class to categorise in</label>
