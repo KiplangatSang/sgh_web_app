@@ -11,28 +11,31 @@ class PostsComposer
 
     public function compose(View $view)
     {
-        $posts = Posts::orderBy('created_at','DESC')->simplePaginate(20);
-        $recomended = Posts::inRandomOrder()->simplePaginate(7);
-       // dd($recomended);
+        $posts = Posts::orderBy('created_at', 'DESC')
+            ->where("post_publish_status", true)
+            ->where("is_suspended", false)
+            ->where("status", true)
+            ->simplePaginate(20);
 
-       // $newposts = Posts::orderBy('created_at','DESC')->simplePaginate(7);
-        //$post['newposts'] = $newposts;
+        $recomended = Posts::inRandomOrder()->simplePaginate(30);
+        foreach ($posts as $post) {
+            $post['artist'] = $post->postable()->first()->get(
+                'id',
+                'name',
+                'email'
+            );
 
-        foreach($posts as $post){
-
-            $post['artist'] =$post->postable()->first()->get('id',
-            'name',
-            'email');
-
-            $post->post_top_image = json_decode( $post->post_top_image);
+            $post->post_top_image = json_decode($post->post_top_image);
         }
-        foreach($recomended as $post){
+        foreach ($recomended as $post) {
 
-            $post['artist'] =$post->postable()->first()->get('id',
-            'name',
-            'email');
+            $post['artist'] = $post->postable()->first()->get(
+                'id',
+                'name',
+                'email'
+            );
 
-            $post->post_top_image = json_decode( $post->post_top_image);
+            $post->post_top_image = json_decode($post->post_top_image);
         }
 
         $data = array();
@@ -43,10 +46,4 @@ class PostsComposer
 
         $view->with('data', $data);
     }
-
-
-
-
-
-
 }

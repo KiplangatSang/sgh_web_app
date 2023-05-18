@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        if(auth()->user()->isAdmin == true ){
+        if (auth()->user()->isAdmin == true) {
             $userscount = count(User::all());
             $articlescount = count(Posts::all());
             $publishedcount = count(Posts::all());
@@ -46,29 +46,24 @@ class HomeController extends Controller
 
 
 
-            return view('admin.home',compact('homedata'));
-        }else{
-            //dd(Posts::where('postable_id',auth()->user()->id)->get());
-            if(auth()->user()->role == 1 ){
-                $user = User::where('id',auth()->user()->id)->first();
+            return view('admin.home', compact('homedata'));
+        } else {
+            if (auth()->user()->role == 1) {
+                $user = User::where('id', auth()->user()->id)->first();
 
-                $posts = $user->posts()->orderBy('created_at','DESC')->get();
+                $posts = $user->posts()->orderBy('created_at', 'DESC')->get();
                 $comments = Comments::all();
 
 
                 $data = array();
-
-
                 $data['posts'] = $posts;
-                $data['comments'] =$comments;
+                $data['comments'] = $comments;
 
 
-                return view('home',compact('data'));
-            }elseif(auth()->user()->role == 2){
+                return view('home', compact('data'));
+            } else {
                 return;
             }
-
         }
-
     }
 }
