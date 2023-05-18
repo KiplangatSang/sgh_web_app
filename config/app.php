@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'SG-H'),
 
     /*
     |--------------------------------------------------------------------------
@@ -207,9 +207,11 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-
+    'posts_pagination' => 30,
+    'recommended_pagination'=> 30,
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+
     ])->toArray(),
 
 ];

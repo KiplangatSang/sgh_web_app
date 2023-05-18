@@ -37,7 +37,10 @@ class NewsCotroller extends Controller
                 $posts = Posts::where('post_category', $category->id)
                     ->inRandomOrder()
                     ->with('postable')
-                    ->simplePaginate(20);
+                    ->where("post_publish_status", true)
+                    ->where("is_suspended", false)
+                    ->where("status", true)
+                   ->simplePaginate(config('app.posts_pagination'));
 
                 foreach ($posts as $post) {
                     $post->post_top_image = json_decode($post->post_top_image);
@@ -47,7 +50,10 @@ class NewsCotroller extends Controller
         } else {
             $posts = Posts::inRandomOrder()
                 ->with('postable')
-                ->simplePaginate(20);
+                ->where("post_publish_status", true)
+                ->where("is_suspended", false)
+                ->where("status", true)
+               ->simplePaginate(config('app.posts_pagination'));
             foreach ($posts as $post) {
                 $post->post_top_image = json_decode($post->post_top_image);
             }
@@ -56,7 +62,10 @@ class NewsCotroller extends Controller
 
         $recomended = Posts::inRandomOrder()
             ->with('postable')
-            ->simplePaginate(14);
+            ->where("post_publish_status", true)
+            ->where("is_suspended", false)
+            ->where("status", true)
+            ->simplePaginate(config('app.recommended_pagination'));
         $newsdata['recomended'] = $recomended;
         foreach ($recomended as $post) {
             $post->post_top_image = json_decode($post->post_top_image);

@@ -37,8 +37,11 @@ class TechCotroller extends Controller
                 $posts = Posts::where('post_category', $category->id)
                     ->inRandomOrder()
                     ->with('postable')
+                    ->where("post_publish_status", true)
+                    ->where("is_suspended", false)
+                    ->where("status", true)
                     ->orderBy('created_at', 'DESC')
-                    ->simplePaginate(20);
+                    ->simplePaginate(config('app.posts_pagination'));
 
                 foreach ($posts as $post) {
                     $post->post_top_image = json_decode($post->post_top_image);
@@ -48,7 +51,10 @@ class TechCotroller extends Controller
         } else {
             $posts = Posts::inRandomOrder()
                 ->with('postable')
-                ->simplePaginate(20);
+                ->where("post_publish_status", true)
+                ->where("is_suspended", false)
+                ->where("status", true)
+                ->simplePaginate(config('app.posts_pagination'));
             foreach ($posts as $post) {
                 $post->post_top_image = json_decode($post->post_top_image);
             }
@@ -57,7 +63,10 @@ class TechCotroller extends Controller
 
         $recomended = Posts::inRandomOrder()
             ->with('postable')
-            ->simplePaginate(7);
+            ->where("post_publish_status", true)
+            ->where("is_suspended", false)
+            ->where("status", true)
+            ->simplePaginate(config('app.recommended_pagination'));
         $techdata['recomended'] = $recomended;
 
         foreach ($recomended as $post) {
