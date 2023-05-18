@@ -29,7 +29,7 @@
 																				<label for="category_class">Choose the class to categorise in</label>
 
 																				<select class="form-control  @error('category_class') is-invalid @enderror" name="category_class">
-																								<option selected disabled> Select a category</option>
+																								<option selected disabled> Select a class</option>
 																								@foreach ($categorydata['categories'] as $key => $category)
 																												<option value="{{ $key }}">
 																																{{ $category }}
@@ -52,7 +52,7 @@
 																				<label class="display-6" for="category">Input the category</label>
 																				<h6><small id="article_title_help" class="form-text">This will be
 																												used to classify the poems</small></h6>
-																				<input type="heading" name="category" class="form-control @error('category') is-invalid @enderror"
+																				<input type="text" name="category" class="form-control @error('category') is-invalid @enderror"
 																								id="category" placeholder="Enter the category eg Poems" value="{{ old('category') }}">
 																				@error('category')
 																								<span class="invalid-feedback  p-1" role="alert">

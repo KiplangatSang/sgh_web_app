@@ -7,13 +7,14 @@
 				@endphp
 				<div class="row m-1">
 								<div class=" col-md-8 col-xl-8 tile">
-												<form method="POST" action="/admin/articles/category/store" enctype="multipart/form-data" id="articleForm">
-																@csrf
+												<form method="POST" action="{{ route('admin.categories.update',['category'=>$category->id]) }}" enctype="multipart/form-data" id="articleForm">
+													@method("PUT")
+                                                    @csrf
 																<div class="form-group ">
 																				<label for="category_class">Choose the class to categorise in</label>
 
 																				<select class="form-control  @error('category_class') is-invalid @enderror" name="category_class">
-																								<option selected disabled>{{ $category->category_class }}</option>
+																								<option selected>{{ $category->category_class }}</option>
 																								@foreach ($categories as $key => $cat)
 																												<option value="{{ $key }}">{{ $cat }}</option>
 																								@endforeach
@@ -59,8 +60,7 @@
 																<div class="tile-footer">
 																				<div class="row mx-auto">
 																								<div class="mt-2">
-																												<a href="{{ route('admin.categories.index') }}"
-																																class="btn btn-danger">Cancel</a>
+																												<a href="{{ route('admin.categories.index') }}" class="btn btn-danger">Cancel</a>
 																								</div>
 																								<button type="submit" class="btn btn-success m-2"> Submit</button>
 

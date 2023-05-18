@@ -46,9 +46,9 @@ class CategoryController extends Controller
             "Art" => "Art",
             "News" => "News",
         );
-        $categories = Categories::all();
-        $categorydata['categoriesAvailable'] = $categories;
         $categorydata['categories'] = $categories;
+        $categoriesAvailable = Categories::all();
+        $categorydata['categoriesAvailable'] = $categoriesAvailable;
         return view('admin.categories.create', compact('categorydata'));
     }
 
@@ -61,8 +61,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'category' => 'required|string|unique:categories',
+            'category_description' => 'required|string|min:25|max:255',
+            'category_class' => 'required|string',
+        ]);
 
-        // dd($request->all());
         $user = User::whereIn('id', auth()->user())->first();
         //dd($user);
 
@@ -130,15 +134,21 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $category = Categories::where('id', $id)->first();
+        $request->validate([
+            'category' => 'required|string',
+            'category_description' => 'required|string|min:25|max:255',
+            'category_class' => 'required|string',
+        ]);
 
-        $category->update([
+        $category = Categories::where('id', $id)->first();
+        $result =    $category->update([
             'category' => $request->category,
             'category_description' => $request->category_description,
             'category_class' => $request->category_class,
         ]);
 
-
+        if (!$result)
+            return back()->with('error', "Category could not be added ");
 
         return redirect('/admin/articles/category/index')->with('success', 'Category Updated successfully');
     }

@@ -42,12 +42,14 @@
 																																				@php
 																																								$postImages = json_decode($postdata['post']->post_top_image);
 																																				@endphp
-																																				@foreach ($postImages as $image)
-																																								<div class="col-md-6 col-xl-3 d-flex justify-content-center m-1">
-																																												<img src="{{ $image }}" alt="Capture Image"
-																																																class="p-1 d-flex w-100 img-thumbnail rounded">
-																																								</div>
-																																				@endforeach
+																																				@if ($postImages)
+																																								@foreach ($postImages as $image)
+																																												<div class="col-md-6 col-xl-3 d-flex justify-content-center m-1">
+																																																<img src="{{ $image }}" alt="Capture Image"
+																																																				class="p-1 d-flex w-100 img-thumbnail rounded">
+																																												</div>
+																																								@endforeach
+																																				@endif
 																																@endif
 																												</div>
 																												<div class="d-flex justify-content-center m-2">
