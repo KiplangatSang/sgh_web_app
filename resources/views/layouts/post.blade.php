@@ -6,8 +6,10 @@
 				<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 				<meta name="description" content="" />
 				<meta name="author" content="" />
-				<title>SG-H</title>
-				<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+				<title>@yield('title')</title>
+				<meta name="description" content="@yield('description')">
+				<meta name="author" content="@yield('author')">
+				{{--  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />  --}}
 				<!-- Font Awesome icons (free version)-->
 				<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
 				<!-- Google fonts-->
@@ -23,7 +25,7 @@
 				<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
 								crossorigin="anonymous"></script>
 
-                                <!-- google ads-->
+				<!-- google ads-->
 				<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
 								crossorigin="anonymous"></script>
 				{{--  @vite(['resources/sass/app.scss', 'resources/js/app.js'])  --}}
@@ -70,19 +72,19 @@
 				@include('inc.messages')
 				@yield('content')
 				<!-- Footer-->
-                <div class="container">
-                    <!-- google ads-->
-                    <div class="row">
-                                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-                                                    crossorigin="anonymous"></script>
-                                    <!-- responsive-square -->
-                                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-                                                    data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                                    <script>
-                                                    (adsbygoogle = window.adsbygoogle || []).push({});
-                                    </script>
-                    </div>
-                </div>
+				<div class="container">
+								<!-- google ads-->
+								<div class="row">
+												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
+																crossorigin="anonymous"></script>
+												<!-- responsive-square -->
+												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
+																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
+												<script>
+																(adsbygoogle = window.adsbygoogle || []).push({});
+												</script>
+								</div>
+				</div>
 				<footer class="border-top">
 
 								<div class="container px-4 px-lg-5">

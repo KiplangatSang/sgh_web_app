@@ -1,4 +1,7 @@
 @extends('layouts.post')
+@section('title', 'SG-H |'. $postdata['post']->post_title)
+@section('description', $postdata['post']->post_subtitle)
+@section('author', $postdata['post']->postable()->first()->name)
 @section('content')
 				<div>
 								<!-- Page Header-->

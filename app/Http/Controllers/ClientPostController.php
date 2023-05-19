@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Posts\Posts;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientPostController extends Controller
 {
@@ -49,9 +50,13 @@ class ClientPostController extends Controller
      */
     public function show($post_id)
     {
-        if (auth()->user()->isAdmin ||  auth()->user()->role == 1) {
-            $postdata['post'] = Posts::where('post_id', $post_id)
+        $postdata = null;
+        if (Auth::check()) {
+            if(auth()->user()->isAdmin ||  auth()->user()->role == 1)
+            {
+                $postdata['post'] = Posts::where('post_id', $post_id)
                 ->first();
+            }
         } else {
             $postdata['post'] = Posts::where('post_id', $post_id)
                 ->where("post_publish_status", true)
