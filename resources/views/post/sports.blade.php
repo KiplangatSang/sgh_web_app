@@ -1,4 +1,7 @@
 @extends('layouts.post')
+@section('title', 'SG-H | News | Sports |Poems | Songs | Business | Articles | Technology')
+@section('description', "SG-H | News | Sports |Poems | Songs | Business | Articles | Technology")
+@section('author', "SG-H | News | Sports |Poems | Songs | Business | Articles | Technology")
 @section('content')
 				<div>
 								<!-- Page Header-->
