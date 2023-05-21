@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-// use App\Models\Posts\Posts;
+use App\Models\Posts\Posts;
 use Illuminate\Console\Command;
-// use Spatie\Sitemap\Sitemap;
-// use Spatie\Sitemap\Tags\Url;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
 
 class GenerateSitemap extends Command
 {
@@ -31,17 +31,17 @@ class GenerateSitemap extends Command
      */
     public function handle()
     {
-        // $postsitmap = Sitemap::create(env('APP_URL'));
+        $postsitmap = Sitemap::create(env('APP_URL'));
 
         info("sitemap generated");
-        // Posts::get()->each(function (Posts $post) use ($postsitmap) {
-        //     $postsitmap->add(
-        //         Url::create("/{$post->post_id}")
-        //             ->setPriority(0.9)
-        //             ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
-        //     );
-        // });
+        Posts::get()->each(function (Posts $post) use ($postsitmap) {
+            $postsitmap->add(
+                Url::create("/{$post->post_id}")
+                    ->setPriority(0.9)
+                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
+            );
+        });
 
-        // $postsitmap->writeToFile(public_path('sitemap.xml'));
+        $postsitmap->writeToFile(public_path('sitemap.xml'));
     }
 }

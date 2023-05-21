@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('inspire')->everyMinute();
+        // $schedule->command('inspire')->everyMinute();
         $schedule->command('sitemap:generate')->everyMinute();
     }
 
