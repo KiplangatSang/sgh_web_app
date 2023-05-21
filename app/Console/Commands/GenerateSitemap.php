@@ -34,14 +34,14 @@ class GenerateSitemap extends Command
         $postsitmap = Sitemap::create(env('APP_URL'));
 
         info("sitemap generated");
-        // Posts::get()->each(function (Posts $post) use ($postsitmap) {
-        //     $postsitmap->add(
-        //         Url::create("/{$post->post_id}")
-        //             ->setPriority(0.9)
-        //             ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
-        //     );
-        // });
+        Posts::get()->each(function (Posts $post) use ($postsitmap) {
+            $postsitmap->add(
+                Url::create("/{$post->post_id}")
+                    ->setPriority(0.9)
+                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
+            );
+        });
 
-        // $postsitmap->writeToFile(public_path('sitemap.xml'));
+        $postsitmap->writeToFile(public_path('sitemap.xml'));
     }
 }
