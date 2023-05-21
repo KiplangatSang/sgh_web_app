@@ -54,24 +54,4 @@ return [
      */
     'crawl_profile' => Profile::class,
 
-
-    'default' => [
-        'use_cache' => env('SITEMAP_USE_CACHE', true),
-        'cache_key' => env('SITEMAP_CACHE_KEY', 'laravel-sitemap'),
-        'cache_duration' => env('SITEMAP_CACHE_DURATION', 3600),
-        'escaping' => env('SITEMAP_ESCAPING', 'htmlspecialchars'),
-        'use_limit_size' => env('SITEMAP_USE_LIMIT_SIZE', true),
-        'max_size' => env('SITEMAP_MAX_SIZE', 50000),
-    ],
-
-    'sitemap' => [
-        [
-            'url' => 'https://sgh.storms.co.ke/',
-            'last_modification' => '2023-01-01',
-            'change_frequency' => 'daily',
-            'priority' => '0.8',
-        ],
-        // Add more URLs here
-    ],
-
 ];

@@ -182,7 +182,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        /*
+        /*composer require spatie/laravel-sitemap
          * Package Service Providers...
          */
 
@@ -194,8 +194,6 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        Spatie\Sitemap\SitemapServiceProvider::class,
     ],
 
     /*
@@ -209,7 +207,7 @@ return [
     |
     */
     'posts_pagination' => 30,
-    'recommended_pagination'=> 30,
+    'recommended_pagination' => 30,
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
 
