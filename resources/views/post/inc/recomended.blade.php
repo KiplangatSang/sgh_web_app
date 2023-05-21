@@ -9,7 +9,7 @@
 																@endforeach
 												@endif
 								</div>
-								<h5 class="post-subtitle">{!! $recomended->post_title !!}</h5>
+								<h5 class="post-title">{!! $recomended->post_title !!}</h5>
 								<p class="meta">
 												<small>{{ $recomended->created_at->diffForHumans() }}</small>
 												{{--  <small>{{ $recomended->created_at->format('M d Y  H:II') }}</small>  --}}
