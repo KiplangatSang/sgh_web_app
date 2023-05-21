@@ -33,6 +33,7 @@ class GenerateSitemap extends Command
     {
         $postsitmap = Sitemap::create(env('APP_URL'));
 
+        info("sitemap generated");
         Posts::get()->each(function (Posts $post) use ($postsitmap) {
             $postsitmap->add(
                 Url::create("/{$post->post_id}")
