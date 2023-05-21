@@ -33,7 +33,7 @@
 
 																				<!-- google ads-->
 																				<div class="row">
-                                                                                    @include('post.inc.googleonead')
+																								@include('post.inc.googleonead')
 																				</div>
 
 																				<div class="mx-auto d-flex justify-content-center">
@@ -47,7 +47,7 @@
 																<div class="col-md-4 col-lg col-xl m-2">
 																				<!-- google ads-->
 																				<div class="row">
-                                                                                    @include('post.inc.googleonead')
+																								@include('post.inc.googleonead')
 																				</div>
 																				@if (count($articledata['recomended']) > 1)
 																								<h3 class="text-info">Recommended for you</h3>
@@ -65,19 +65,19 @@
 																												{{ $articledata['recomended']->links() }}
 																								</div>
 																								<div class="col-md-2 col-xl-2 p-1">
-                                                                                                    @include('post.inc.googleonead')
+																												@include('post.inc.googleonead')
 																								</div>
 																				@else
 																								<div class="jumbotron p-3">
 																												<div class="col-md-2 col-xl-2 p-1">
-                                                                                                                    @include('post.inc.googleonead')
+																																@include('post.inc.googleonead')
 																												</div>
 																												<h3 class="text-info">Refresh to get new updates</h3>
 																								</div>
 																				@endif
 																				<!-- google ads-->
 																				<div class="row">
-                                                                                    @include('post.inc.googleonead')
+																								@include('post.inc.googleonead')
 																				</div>
 																</div>
 												</div>
