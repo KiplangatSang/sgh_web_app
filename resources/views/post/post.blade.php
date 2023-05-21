@@ -1,5 +1,5 @@
 @extends('layouts.post')
-@section('title', 'SG-H |'. $postdata['post']->post_title)
+@section('title', 'SG-H |' . $postdata['post']->post_title)
 @section('description', $postdata['post']->post_subtitle)
 @section('author', $postdata['post']->postable()->first()->name)
 @section('content')
@@ -7,32 +7,7 @@
 								<!-- Page Header-->
 								<header class="masthead ">
 												<div class="container position-relative  px-lg ">
-																<div class="row">
-																				<!-- google ads-->
-																				<div class="row">
-																								<div class="col">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-																																crossorigin="anonymous"></script>
-																												<!-- responsive-square -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-																																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
-																								<div class="col">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-																																crossorigin="anonymous"></script>
-																												<!-- responsive-square -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-																																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
-																				</div>
-
-																</div>
+																@include('post.inc.googletwoads')
 																<div class="row  gx-lg justify-content-center">
 																				<div class="col-md-10 col-xl-10 ">
 																								<div class="row ">
@@ -84,35 +59,7 @@
 																								</p>
 																				</div>
 																</div>
-																<div class="row">
-																				<div class="col">
-																								<!-- google ads-->
-																								<div class="row">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-																																crossorigin="anonymous"></script>
-																												<!-- responsive-square -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-																																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
-																				</div>
-																				<div class="col">
-																								<!-- google ads-->
-																								<div class="row">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-																																crossorigin="anonymous"></script>
-																												<!-- responsive-square -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-																																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
-																				</div>
-
-																</div>
+																@include('post.inc.googletwoads')
 																<div class="row">
 																				<div class="col-md-4 col-lg-7 col-xl p-5">
 																								<hr>
@@ -145,91 +92,8 @@
 																</div>
 																<div class="row">
 																				<!-- google ads-->
-																				<div class="row">
-																								<div class="col">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-																																crossorigin="anonymous"></script>
-																												<!-- responsive-square -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-																																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
-																								<div class="col">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-																																crossorigin="anonymous"></script>
-																												<!-- responsive-square -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-																																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
-																								<div class="col">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-																																crossorigin="anonymous"></script>
-																												<!-- responsive-square -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-																																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
-																								<div class="col">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-																																crossorigin="anonymous"></script>
-																												<!-- responsive-square -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-																																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
-																				</div>
+																				@include('post.inc.googlefourads')
 																				<!-- google ads-->
-																				<div class="row">
-																								<div class="col">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-																																crossorigin="anonymous"></script>
-																												<!-- responsive-square -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-																																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
-																								<div class="col">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-																																crossorigin="anonymous"></script>
-																												<!-- responsive-square -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-																																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
-																								<div class="col">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-																																crossorigin="anonymous"></script>
-																												<!-- responsive-square -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-																																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
-																								<div class="col">
-																												<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9116569436922792"
-																																crossorigin="anonymous"></script>
-																												<!-- responsive-square -->
-																												<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9116569436922792"
-																																data-ad-slot="2577375845" data-ad-format="auto" data-full-width-responsive="true"></ins>
-																												<script>
-																																(adsbygoogle = window.adsbygoogle || []).push({});
-																												</script>
-																								</div>
-																				</div>
 																</div>
 								</article>
 				</div>
