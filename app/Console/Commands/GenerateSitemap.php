@@ -42,6 +42,9 @@ class GenerateSitemap extends Command
             );
         });
 
-        $postsitmap->writeToFile(public_path('sitemap.xml'));
+        if (env('APP_DEBUG') || env('APP_DEBUG') == "true")
+            $postsitmap->writeToFile(public_path('sitemap.xml'));
+        else
+            $postsitmap->writeToFile("/home/stormsco/public_html/new_sgh_public/sitemap.xml");
     }
 }
