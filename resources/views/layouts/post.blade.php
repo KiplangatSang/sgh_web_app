@@ -4,7 +4,9 @@
 <head>
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+                <meta name="name" content="{{ config('app.name') }}">
 				<title>@yield('title')</title>
+                <meta name="url" content="{{ config('app.url') }}">
 				<meta name="description" content="@yield('description')">
 				<meta name="author" content="@yield('author')">
 				{{--  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />  --}}
