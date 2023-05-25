@@ -36,7 +36,7 @@ class GenerateSitemap extends Command
         info(env('APP_DEBUG'));
         Posts::get()->each(function (Posts $post) use ($postsitmap) {
             $postsitmap->add(
-                Url::create("/{$post->post_id}")
+                Url::create("/{$post->post_title}")
                     ->setPriority(0.9)
                     ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
             );

@@ -94,7 +94,8 @@ Route::get('/articles/hidden', function () {
 });
 
 Route::get('/users/posts/post/{post_id}', [ClientPostController::class, 'show']);
-Route::get('/{post_id}', [ClientPostController::class, 'show']);
+Route::get('/{post_title}', [ClientPostController::class, 'show']);
+Route::get('/post/{post_id}', [ClientPostController::class, 'showPost'])->name('viewpost');
 
 Route::get('/articles/contact', function () {
     return view('post.contact');

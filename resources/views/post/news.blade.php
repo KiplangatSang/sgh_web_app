@@ -21,13 +21,7 @@
 																				<div class="col-md-8 col-lg-7 col-xl-7">
 																								@foreach ($newsdata['posts'] as $post)
 																												<!-- Post preview-->
-
-																												<div class="post-preview">
-																																<a href="/{{ $post->post_id }}">
-																																				@include('post.inc.postimage')
-																																</a>
-
-																												</div>
+																												@include('post.inc.postimage')
 																												<!-- Divider-->
 																												<hr class="my-4" />
 																								@endforeach

@@ -17,13 +17,7 @@
 
 																								@foreach ($businessdata['posts'] as $post)
 																												<!-- Post preview-->
-
-																												<div class="post-preview">
-																																<a href="/{{ $post->post_id }}">
-																																				@include('post.inc.postimage')
-																																</a>
-
-																												</div>
+																												@include('post.inc.postimage')
 																												<!-- Divider-->
 																												<hr class="my-4" />
 																								@endforeach
@@ -32,7 +26,7 @@
 																												{{ $businessdata['posts']->links() }}
 																								</div>
 
-                                                                                                @include('post.inc.googleonead')
+																								@include('post.inc.googleonead')
 																								<!-- Pager-->
 
 																				</div>
@@ -57,7 +51,7 @@
 																				@else
 																								<div class="jumbotron p-3">
 																												<div class="col-md-2 col-xl-2 p-1">
-                                                                                                                    @include('post.inc.googleonead')
+																																@include('post.inc.googleonead')
 																												</div>
 																												<h3 class="text-info">Refresh to get new updates</h3>
 																								</div>

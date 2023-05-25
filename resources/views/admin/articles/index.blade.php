@@ -36,7 +36,7 @@
 												@else
 																@foreach ($postdata['posts'] as $post)
 																				<div class="tile post-div mt-2">
-																								<a href="/{{ $post->post_id }}" class="btn btn-secondary">View in web</a>
+																								<a href="{{ route('viewpost',['post_id' => $post->post_id]) }}" class="btn btn-secondary">View in web</a>
 																								<a href="{{ route('admin.articles.show', ['article' => $post->id]) }}" class="btn btn-info">Show</a>
 
 																								@if (!$post->is_suspended)

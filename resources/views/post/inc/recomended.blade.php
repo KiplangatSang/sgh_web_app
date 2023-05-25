@@ -1,7 +1,7 @@
 <div class="post-preview">
-				<a href="/{{ $recomended->post_id }}">
+				<a href="/{{ $recomended->post_title }}">
 
-								<p class="post-meta">{!! $recomended->post_subtitle !!} subtitle</p>
+								<p class="post-meta"><small>{!! $recomended->post_subtitle !!}</small></p>
 								<div class="row">
 												@if ($recomended['post_top_image'] != null)
 																@foreach ($recomended['post_top_image'] as $image)
@@ -9,7 +9,7 @@
 																@endforeach
 												@endif
 								</div>
-								<h6 class="post-meta"><small>{!! $recomended->post_title !!} Title</small></h6>
+								<h6 class="post-meta"><small>{!! $recomended->post_title !!}</small></h6>
 								<p class="post-meta">
 												<small>{{ $recomended->created_at->diffForHumans() }}</small>
 												{{--  <small>{{ $recomended->created_at->format('M d Y  H:II') }}</small>  --}}

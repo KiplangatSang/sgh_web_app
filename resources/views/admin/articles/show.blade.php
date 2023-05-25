@@ -3,7 +3,7 @@
 				<div class="row p-3 mx-auto">
 								<div class="col-lg-8 col-xl-8">
 												<div class="tile post-div mt-2">
-																<a href="/{{ $post->post_id }}" class="btn btn-secondary">View in web</a>
+																<a href="{{ route('viewpost',['post_id' => $post->post_id]) }}" class="btn btn-secondary">View in web</a>
 
 																@if (!$post->is_suspended)
 																				<a onclick="event.preventDefault(); document.getElementById('suspend-form').submit();"
