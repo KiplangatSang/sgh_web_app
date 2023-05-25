@@ -1,7 +1,7 @@
 @extends('layouts.post')
-@section('title', 'SG-H | News | Sports |Poems | Songs | Business | Articles | Technology')
-@section('description', 'SG-H | News | Sports |Poems | Songs | Business | Articles | Technology')
-@section('author', 'SG-H | News | Sports |Poems | Songs | Business | Articles | Technology')
+@section('title', 'News | Sports |Poems | Songs | Business | Articles | Technology')
+@section('description', ' News | Sports |Poems | Songs | Business | Articles | Technology')
+@section('author', ' News | Sports |Poems | Songs | Business | Articles | Technology')
 @section('content')
 				<div>
 								@include('inc.home_header')
