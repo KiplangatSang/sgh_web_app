@@ -47,7 +47,7 @@ class ExternalAPIRepository
                 foreach ($article->images as $post_image) {
                     try {
 
-                        $alt =  $post_image->alt ?? $post_image->caption;
+                        // $alt =  $post_image->alt ?? $post_image->caption;
                         $url = $post_image->url;
 
                         array_push($images, $url);
