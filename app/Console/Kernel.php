@@ -14,8 +14,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->everyMinute();
         $schedule->command('sitemap:generate')->everyThreeHours();
-        $schedule->command('fetch:news')->hourly();
-        // $schedule->command('fetch:news')->everyMinute();
+        // $schedule->command('fetch:news')->hourly();
+        $schedule->command('fetch:news')->everyMinute();
     }
 
     /**
