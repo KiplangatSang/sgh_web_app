@@ -34,6 +34,7 @@ class SportController extends Controller
         if (count($categories)) {
             foreach ($categories as $category) {
                 $posts = Posts::where('post_category', $category->id)
+                    ->orWhere('post_category', 'LIKE', '%' . 'SPORTS%')
                     ->inRandomOrder()
                     ->with('postable')
                     ->where("post_publish_status", true)
@@ -52,6 +53,7 @@ class SportController extends Controller
                 ->where("post_publish_status", true)
                 ->where("is_suspended", false)
                 ->where("status", true)
+                ->orWhere('post_category', 'LIKE', '%' . 'SPORTS%')
                 ->simplePaginate(config('app.posts_pagination'));
             foreach ($posts as $post) {
                 $post->post_top_image = json_decode($post->post_top_image);
