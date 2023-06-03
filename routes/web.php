@@ -9,11 +9,14 @@ use App\Http\Controllers\Admin\Articles\ArticleProcessingController;
 use App\Http\Controllers\Admin\Articles\PendingArticleController;
 use App\Http\Controllers\Admin\Articles\PublishedArticleController;
 use App\Http\Controllers\Admin\Categories\CategoryController;
+use App\Http\Controllers\Admin\ExternalPostsAPIController;
 use App\Http\Controllers\Admin\Users\AccountController;
 use App\Http\Controllers\Admin\Users\AccountSuspensionController;
 use App\Http\Controllers\Admin\Users\ArticleController as UsersArticleController;
+use App\Http\Controllers\Author\PostController as AuthorPostController;
 use App\Http\Controllers\Client\ResponseController;
 use App\Http\Controllers\ClientPostController;
+use App\Http\Controllers\ExternalNewsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Post\PostBodyController;
 use App\Http\Controllers\Posts\BusinessController;
@@ -38,10 +41,6 @@ use Illuminate\Support\Facades\Auth;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Auth::routes();
 
@@ -121,14 +120,35 @@ Route::get('/user/post/show/{id}', [PostController::class, 'show']);
 Route::get('/user/post/edit/{id}', [PostController::class, 'edit']);
 Route::post('/user/post/update/{id}', [PostController::class, 'update']);
 Route::post('/user/post/delete/{id}', [PostController::class, 'destroy']);
-Route::post('/user/post/preview/{id}', [PostController::class, 'preview']);
+
+
+Route::resource('/externalnewsitems', ExternalNewsController::class);
+
+Route::prefix('/author')->name('author.')->middleware(['auth', 'author',])->group(
+    function () {
+        Route::post('/post/preview/{id}', [AuthorPostController::class, 'preview'])->name('preview');
+        Route::post('/post/veiwinweb/{id}', [AuthorPostController::class, 'viewInWeb'])->name('veiwinweb');
+        Route::resource('post', AuthorPostController::class);
+
+
+        //post images
+        Route::resource('postimages', PostImageController::class);
+
+        Route::get('images/index', [PostImageController::class, 'index']);
+        Route::get('/post/image/create', [PostImageController::class, 'create']);
+        Route::post('/post/image/store/{post_id}', [PostImageController::class, 'store']);
+        Route::get('/post/image/show/{id}', [PostImageController::class, 'show']);
+        Route::get('/post/image/edit/{id}', [PostImageController::class, 'edit']);
+        Route::get('/post/image/update/{id}', [PostImageController::class, 'update']);
+        Route::get('/post/image/delete/{id}', [PostImageController::class, 'destroy']);
+    }
+);
 
 //move to word editor to edit the article body
 Route::resource('post.postbody', PostBodyController::class);
 
 // Route::get('/user/post/move_to_editor/{id}', [PostController::class, 'moveToArticleEditor']);
 // Route::post('/user/post/update-article-desc/{id}', [PostController::class, 'updateArticleDescription']);
-
 
 
 //post images
@@ -159,7 +179,7 @@ Route::post('/post/image/firebase', [PostImageController::class, 'uploadImageToF
 
 
 
-Route::prefix('/admin')->name('admin.')->middleware(['admin',])->group(
+Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin',])->group(
     function () {
         Route::resource('categories', CategoryController::class);
 
@@ -181,6 +201,14 @@ Route::prefix('/admin')->name('admin.')->middleware(['admin',])->group(
 
         //Account Suspension
         Route::resource('/suspendeduseraccounts', AccountSuspensionController::class);
+
+        //Account Suspension
+        Route::put('/apis/commands/{apiadmincommand}',[ ExternalPostsAPIController::class,'updateAdminCommands'])->name('apiadmincommands');
+        Route::resource('/apis', ExternalPostsAPIController::class);
+
+
+
+
     }
 );
 

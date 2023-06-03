@@ -20,7 +20,7 @@
 																												<h5 class="display-5  mt-1 ml-2 text-info">{{ count($data['posts']) }} Posts</h5>
 																								</div>
 																								<hr>
-																								<a href="/user/post/create" class="btn btn-primary">Create Post</a>
+																								<a href="{{ route('author.post.create') }}" class="btn btn-primary">Create Post</a>
 																				</div>
 																</div>
 
@@ -30,7 +30,7 @@
 								<div class="col-lg-8 col-xl-8">
 												@foreach ($data['posts'] as $post)
 																<div class="tile post-div mt-2">
-																				<a href="/user/post/show/{{ $post->post_id }}" class="btn btn-secondary">View</a>
+																				<a href="{{ route('author.post.show', ['post' => $post->post_id]) }}" class="btn btn-secondary">View</a>
 
 																				<hr>
 																				<br>

@@ -15,8 +15,8 @@ class IsEditorMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role != 1) {
-            return back()->with('error', 'You are not an editor');
+        if ( $request->user()->role != 1) {
+            abort(403,'You are not an editor');
         }
         return $next($request);
     }

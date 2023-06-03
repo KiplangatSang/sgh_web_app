@@ -1,6 +1,6 @@
 <div class="post-preview">
 				<a href="/{{ $post->post_title }}">
-								<h4 class="post-title">{{ $post->post_title }}</h4>
+								<h4 class="post-title">{!! $post->post_title !!}</h4>
 								<p class="post-subtitle">{!! $post->post_subtitle !!}</p>
 
 								<div class="row">

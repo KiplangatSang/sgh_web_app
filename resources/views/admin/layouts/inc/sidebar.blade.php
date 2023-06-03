@@ -63,5 +63,20 @@
 
 												</ul>
 								</li>
+								<li class="treeview"><a class="app-menu__item " href="#" data-toggle="treeview"><i
+																				class="app-menu__icon fa fa-globe"></i><span class="app-menu__label">APIS
+																</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+												<ul class="treeview-menu">
+																<li><a class="treeview-item " href="{{ route('admin.apis.index') }}"><i class="icon fa fa-circle-o"></i>
+																								APIS
+																				</a></li>
+																<li><a class="treeview-item " href="{{ route('admin.apis.create') }}"><i
+																												class="icon fa fa-circle-o"></i>
+																								Create APIS
+																				</a></li>
+
+												</ul>
+								</li>
+
 				</ul>
 </aside>

@@ -15,16 +15,17 @@ use Illuminate\Support\Facades\Log;
 
 class PostImageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+    protected $paginate = 40;
     public function index()
     {
         //
 
+        $images = PostsImages::simplePaginate($this->paginate);
+        return view('author.images.index', compact('images'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -34,6 +35,8 @@ class PostImageController extends Controller
     public function create()
     {
         //
+
+        return view('author.images.create');
     }
 
     /**
@@ -51,34 +54,23 @@ class PostImageController extends Controller
         $storageRepo = new StorageRepository();
         $image = $storageRepo->store($uploadfile);
 
-        // dd($image);
 
-       // $post = Posts::where('id', $id)->first();
+        $post = Posts::where('id', $id)->first();
 
-        // $post->postImages()->create([
-        //     'image' => $image,
-        // ]);
+        $post->postImages()->create([
+            'image' => $image,
+        ]);
 
         $imageArr = array();
-        if(session()->has('images')){
+        if (session()->has('images')) {
             $imageArr =  session('images');
         }
-        array_push($imageArr,$image);
-        $request->session()->put('images',$imageArr);
-
-
-
-
-       // $images = $post->postImages()->orderBy('created_at', 'DESC')->get();
-       // $postdata = array();
-       // $postdata['images'] = $images;
-
-
-      //  return back();
+        array_push($imageArr, $image);
+        $request->session()->put('images', $imageArr);
     }
 
 
-    public function storeTitleImage(Request $request,$id)
+    public function storeTitleImage(Request $request, $id)
     {
         $uploadfile = $request->file('file');
 
@@ -87,16 +79,15 @@ class PostImageController extends Controller
 
 
         $imageArray = array();
-        if(session()->has('image_title')){
+        if (session()->has('image_title')) {
             $imageArray =  session('image_title');
         }
-        array_push($imageArray,$image);
-        $request->session()->put('image_title',$imageArray);
+        array_push($imageArray, $image);
+        $request->session()->put('image_title', $imageArray);
     }
 
     public function uploadImageToFirebase(Request $request)
     {
-
 
         $storageRepo = new StorageRepository();
         $image = $storageRepo->store($request->file);
@@ -112,6 +103,10 @@ class PostImageController extends Controller
     public function show($id)
     {
         //
+
+        $image =   PostsImages::findOrFail($id);
+        $images = PostsImages::simplePaginate($this->paginate);
+        return view('author.images.show', compact('images', 'image'));
     }
 
     /**
@@ -123,6 +118,9 @@ class PostImageController extends Controller
     public function edit($id)
     {
         //
+        $image =   PostsImages::findOrFail($id);
+        $images = PostsImages::simplePaginate($this->paginate);
+        return view('author.images.show', compact('images', 'image'));
     }
 
     /**

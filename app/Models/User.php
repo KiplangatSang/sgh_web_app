@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->morphMany(PostsImages::class, 'postImageable');
     }
+
+    public function apis()
+    {
+        return $this->morphMany(ExternalPostsAPI::class, 'apiable');
+    }
 }

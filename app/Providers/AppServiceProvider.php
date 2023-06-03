@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\APIPosts\ESPNGateway;
+use App\Http\APIPosts\FetchNewsContract;
 use App\Http\Views\Composers\ArticleComposer;
 use App\Http\Views\Composers\PostsComposer;
 use App\Http\Views\Composers\UsersComposer;
@@ -17,6 +19,24 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+
+
+        $this->app->singleton(FetchNewsContract::class, function ($app) {
+            $gateway = "ESPNGateway";
+
+
+            if (request()->has('gateway')) {
+                $gateway =  request()->gateway;
+            }
+
+            switch ($gateway) {
+                case "ESPN":
+                    return new ESPNGateway(request()->params);
+                    break;
+                default:
+                    return new ESPNGateway(request()->params);
+            }
+        });
     }
 
     /**

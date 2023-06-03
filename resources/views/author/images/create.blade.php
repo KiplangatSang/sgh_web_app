@@ -112,7 +112,7 @@
 												<hr>
 												<br>
 
-												<form method="POST" action="/user/post/update/{{ $postdata['post']->id }}"
+												<form method="POST" action="{{ route('author.post.show', ['post' => $postdata['post']->id]) }}"
 																enctype="multipart/form-data" id="articleForm">
 																@csrf
 

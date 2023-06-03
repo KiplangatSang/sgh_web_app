@@ -21,9 +21,7 @@
 				<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 				<link href="{{ asset('assets2/css/main.css') }}" rel="stylesheet">
                 <link href="{{ asset('assets/css/comments.css') }}" rel="stylesheet">
-
 </head>
-
 <body>
 				<div id="app">
 								<nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">

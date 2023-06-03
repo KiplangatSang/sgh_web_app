@@ -15,8 +15,8 @@ class IsAdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role != 0 && auth()->user()->isAdmin != true) {
-            return back()->with('error','You are not an admin');
+        if ($request->user()->role != 0 && $request->user()->isAdmin != true) {
+            return back()->with('error', 'You are not an admin');
         }
         return $next($request);
     }

@@ -12,7 +12,7 @@
 																				<div class="col-md-10 col-xl-10 ">
 																								<div class="row ">
 																												<div class="d-flex justify-content-center m-2">
-																																<h1>{{ $postdata['post']->post_title }}</h1>
+																																<h3 >{!! $postdata['post']->post_title !!}</h3>
 																												</div>
 
 																												<div class="row d-flex justify-content-center mx-auto">

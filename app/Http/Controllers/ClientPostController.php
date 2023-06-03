@@ -50,18 +50,21 @@ class ClientPostController extends Controller
      */
     public function show($post_title)
     {
+
         $postdata = null;
         if (Auth::check()) {
             if (auth()->user()->isAdmin ||  auth()->user()->role == 1) {
                 $postdata['post'] = Posts::where('post_title', $post_title)
                     ->first();
             }
+            dd("ost_title");
         } else {
             $postdata['post'] = Posts::where('post_title', $post_title)
                 ->where("post_publish_status", true)
                 ->where("is_suspended", false)
                 ->where("status", true)
                 ->first();
+              //  dd("else");
         }
 
 
@@ -81,7 +84,6 @@ class ClientPostController extends Controller
         $post_top_image = array();
         if ($post_top_image) {
         }
-
 
         return view('post.post', compact('postdata'));
     }

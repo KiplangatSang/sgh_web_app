@@ -77,7 +77,7 @@ class PostController extends Controller
         $user = User::where('id', auth()->user()->id)->first();
 
         try {
-            $post_id = Str::random(60);
+            $post_id = Str::random(12);
             // $post_top_image = $user->postImages()->whereNotNull('post_top_image')
             //     ->take(2)
             //     ->get('post_top_image');
