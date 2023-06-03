@@ -27,7 +27,7 @@ class SportController extends Controller
         $siteVisit->store($request);
 
         $sportdata['posts'] = null;
-        $categories = Categories::where('category', 'LIKE', '%' . 'Sport%')
+        $categories = Categories::where('category', 'LIKE', '%' . 'Sports%')
             ->with('posts.postable')
             ->get();
         if (count($categories)) {

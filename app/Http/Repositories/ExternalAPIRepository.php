@@ -36,7 +36,7 @@ class ExternalAPIRepository
         foreach ($articles as $article) {
 
             $request['post_id'] = Str::random(12);
-            $request['post_category'] = "SPORTS";
+            $request['post_category'] = "Sports";
             $request['post_title'] = $category . ". <br> <br>  " .  $article->headline . ". <br>";
 
             // return $request['post_title'];
