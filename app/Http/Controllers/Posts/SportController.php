@@ -61,7 +61,7 @@ class SportController extends Controller
             $sportdata['posts'] = $posts;
         }
 
-        dd($sportdata);
+       // dd($sportdata);
 
         $recomended = Posts::inRandomOrder()
             ->with('postable')
