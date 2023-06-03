@@ -48,23 +48,25 @@ class ClientPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($post_title)
+    public function show($post_title, Request $request)
     {
 
         $postdata = null;
         if (Auth::check()) {
             if (auth()->user()->isAdmin ||  auth()->user()->role == 1) {
                 $postdata['post'] = Posts::where('post_title', $post_title)
+                    ->orWhere('post_id', $request->post_id)
                     ->first();
             }
             dd("ost_title");
         } else {
             $postdata['post'] = Posts::where('post_title', $post_title)
+                ->orWhere('post_id', $request->post_id)
                 ->where("post_publish_status", true)
                 ->where("is_suspended", false)
                 ->where("status", true)
                 ->first();
-              //  dd("else");
+            //  dd("else");
         }
 
 

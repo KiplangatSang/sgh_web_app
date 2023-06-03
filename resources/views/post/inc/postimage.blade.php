@@ -1,5 +1,5 @@
 <div class="post-preview">
-				<a href="/{{ $post->post_title }}">
+				<a onclick="event.preventDefault(); document.getElementById('post-id-form').submit();">
 								<h4 class="post-title">{!! $post->post_title !!}</h4>
 								<p class="post-subtitle">{!! $post->post_subtitle !!}</p>
 
@@ -17,4 +17,10 @@
 												{{--  on {{ $post->created_at->format('D M Y  H:II') . ' hrs' }}</small>  --}}
 								</h6>
 				</a>
+				<div class="row d-none">
+								<form action="/{{ $post->post_title }}" id="post-id-form" method="POST">
+												@csrf
+												<input type="text" name="post_id" value="{{ $post->post_id }}">
+								</form>
+				</div>
 </div>

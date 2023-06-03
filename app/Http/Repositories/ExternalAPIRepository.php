@@ -49,7 +49,6 @@ class ExternalAPIRepository
 
                         // $alt =  $post_image->alt ?? $post_image->caption;
                         $url = $post_image->url;
-
                         array_push($images, $url);
                     } catch (Exception $e) {
                         info($e->getMessage());

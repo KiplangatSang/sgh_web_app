@@ -93,7 +93,10 @@ Route::get('/articles/hidden', function () {
 });
 
 Route::get('/users/posts/post/{post_id}', [ClientPostController::class, 'show']);
-Route::get('/{post_title}', [ClientPostController::class, 'show']);
+// Route::get('/{post_title}', [ClientPostController::class, 'show']);
+Route::post('/{post_title}', [ClientPostController::class, 'show']);
+
+
 Route::get('/post/{post_id}', [ClientPostController::class, 'showPost'])->name('viewpost');
 
 Route::get('/articles/contact', function () {
@@ -203,12 +206,8 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin',])->group(
         Route::resource('/suspendeduseraccounts', AccountSuspensionController::class);
 
         //Account Suspension
-        Route::put('/apis/commands/{apiadmincommand}',[ ExternalPostsAPIController::class,'updateAdminCommands'])->name('apiadmincommands');
+        Route::put('/apis/commands/{apiadmincommand}', [ExternalPostsAPIController::class, 'updateAdminCommands'])->name('apiadmincommands');
         Route::resource('/apis', ExternalPostsAPIController::class);
-
-
-
-
     }
 );
 
