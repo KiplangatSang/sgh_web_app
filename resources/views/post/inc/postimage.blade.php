@@ -3,7 +3,6 @@
 								//	$url = urlencode(htmlspecialchars($post->post_id));
 				@endphp
 				<a href="/{{ urlencode(htmlspecialchars($post->post_id)) }}">
-								<h4> {{ $post->post_id }}</h4>
 								<h4 class="post-title">{!! $post->post_title !!}</h4>
 								<p class="post-subtitle">{!! $post->post_subtitle !!}</p>
 
