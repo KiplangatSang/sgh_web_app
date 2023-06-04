@@ -1,5 +1,5 @@
 <div class="post-preview">
-				<a onclick="event.preventDefault(); document.getElementById('post-id-form').submit();">
+				<a href="/{{ urlencode($recomended->post_title) }}">
 
 								<p class="post-meta"><small>{!! $recomended->post_subtitle !!}</small></p>
 								<div class="row">
@@ -15,11 +15,5 @@
 												{{--  <small>{{ $recomended->created_at->format('M d Y  H:II') }}</small>  --}}
 								</p>
 				</a>
-				<div class="row d-none">
-								<form action="/{{ $recomended->post_title }}" id="post-id-form" method="POST">
-												@csrf
-												<input type="text" name="post_id" value="{{ $recomended->post_id }}">
-								</form>
-				</div>
 
 </div>

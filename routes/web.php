@@ -78,10 +78,7 @@ Route::get('/', function () {
 });
 
 
-Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
-
 
 
 //post articles
@@ -93,8 +90,8 @@ Route::get('/articles/hidden', function () {
 });
 
 Route::get('/users/posts/post/{post_id}', [ClientPostController::class, 'show']);
-// Route::get('/{post_title}', [ClientPostController::class, 'show']);
-Route::post('/{post_title}', [ClientPostController::class, 'show']);
+Route::get('/{post_title}', [ClientPostController::class, 'show']);
+// Route::post('/{post_title}', [ClientPostController::class, 'show']);
 
 
 Route::get('/post/{post_id}', [ClientPostController::class, 'showPost'])->name('viewpost');
@@ -124,6 +121,7 @@ Route::get('/user/post/edit/{id}', [PostController::class, 'edit']);
 Route::post('/user/post/update/{id}', [PostController::class, 'update']);
 Route::post('/user/post/delete/{id}', [PostController::class, 'destroy']);
 
+Route::get('/externalnewsitems/updatePosts', [ExternalNewsController::class,'updatePosts']);
 
 Route::resource('/externalnewsitems', ExternalNewsController::class);
 

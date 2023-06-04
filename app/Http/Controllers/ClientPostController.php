@@ -48,27 +48,26 @@ class ClientPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($post_title, Request $request)
+    public function show($post_id)
     {
+
 
         $postdata = null;
         if (Auth::check()) {
             if (auth()->user()->isAdmin ||  auth()->user()->role == 1) {
-                $postdata['post'] = Posts::where('post_title', $post_title)
-                    ->orWhere('post_id', $request->post_id)
+                $postdata['post'] = Posts::where('post_id', $post_id)
+                    // ->orWhere('post_id', $request->post_id)
                     ->first();
             }
-            dd("ost_title");
         } else {
-            $postdata['post'] = Posts::where('post_title', $post_title)
-                ->orWhere('post_id', $request->post_id)
+           // $post_id =  $post_id."\n"."db: Premier+League+News.+%26lt%3Bbr%26gt%3B+%26lt%3Bbr%26gt%3B++Why+Mount+might+be+wrong+for+Man+United.+%26lt%3Bbr%26gt%3B";
+
+            $postdata['post'] = Posts::where('post_id', $post_id)
                 ->where("post_publish_status", true)
                 ->where("is_suspended", false)
                 ->where("status", true)
                 ->first();
-            //  dd("else");
         }
-
 
         $newposts = Posts::orderBy('created_at', 'DESC')
             ->where("post_publish_status", true)

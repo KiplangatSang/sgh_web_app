@@ -1,5 +1,9 @@
 <div class="post-preview">
-				<a onclick="event.preventDefault(); document.getElementById('post-id-form').submit();">
+				@php
+								//	$url = urlencode(htmlspecialchars($post->post_id));
+				@endphp
+				<a href="/{{ urlencode(htmlspecialchars($post->post_id)) }}">
+								<h4> {{ $post->post_id }}</h4>
 								<h4 class="post-title">{!! $post->post_title !!}</h4>
 								<p class="post-subtitle">{!! $post->post_subtitle !!}</p>
 
@@ -17,10 +21,4 @@
 												{{--  on {{ $post->created_at->format('D M Y  H:II') . ' hrs' }}</small>  --}}
 								</h6>
 				</a>
-				<div class="row d-none">
-								<form action="/{{ $post->post_title }}" id="post-id-form" method="POST">
-												@csrf
-												<input type="text" name="post_id" value="{{ $post->post_id }}">
-								</form>
-				</div>
 </div>

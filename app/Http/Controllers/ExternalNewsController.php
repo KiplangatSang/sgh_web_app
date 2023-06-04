@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\APIPosts\FetchNewsContract;
 use App\Http\Repositories\ExternalAPIRepository;
 use App\Models\ExternalPostsAPI;
+use App\Models\Posts\Posts;
 use App\Models\User;
 use DateTime;
 use Exception;
@@ -96,6 +97,28 @@ class ExternalNewsController extends Controller
     public function update(Request $request, string $id)
     {
         //
+
+
+
+    }
+
+    public function updatePosts()
+    {
+        # code...
+        $posts= Posts::all();
+        foreach($posts as $post){
+
+
+        $result =   $post->update([
+            'post_id'=> urlencode(htmlspecialchars( $post->post_title)),
+           ]);
+
+           if(!$result)
+           return false;
+
+        }
+
+        return "success";
     }
 
     /**
