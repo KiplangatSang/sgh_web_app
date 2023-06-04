@@ -1,6 +1,5 @@
 <div class="post-preview">
-				<a href="/{{ urlencode($recomended->post_title) }}">
-
+				<a href="/{{ urlencode(htmlspecialchars($post->post_id)) }}">
 								<p class="post-meta"><small>{!! $recomended->post_subtitle !!}</small></p>
 								<div class="row">
 												@if ($recomended['post_top_image'] != null)
