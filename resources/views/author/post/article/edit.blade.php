@@ -1,91 +1,132 @@
 @extends('layouts.app')
 
 @section('content')
-				<div class="row m-1  tile ">
-								<div class="col col-md-6 col-xl-4">
-												<div class="">
-																<div class="tile-title">Articles</div>
-																<div class="tile-body">
-																				<h3 class="display-5 text-success"><small>{{ auth()->user()->name }}</small></h3>
-																				<h6><small>{{ auth()->user()->email }}</small> </h6>
-																				<hr>
-																				<div class="col">
-																								<div class="">
-																												<div class="tile-body">
-																																<h3>Title images</h3>
-																																@if (session('image_title'))
-																																				@foreach (session('image_title') as $key => $image)
-																																								<div class="row m-1">
-																																												<div class="col-md-2 icon m-1">
-																																																<img src="{{ $image }}" alt="title image" width="35"
-																																																				height="35">
-																																												</div>
-																																												<input type="text" value="{{ $image }} "
-																																																id="imageUrlInput-{{ $key }}" class="disabled">
-																																												<button class="btn btn-secondary ml-2"
-																																																onclick="copyImageUrl('imageUrlInput-'+@json($key),'imageUrlBtn-'+@json($key))"
-																																																id="imageUrlBtn-{{ $key }}">Copy</button>
+				@php
+								$post = $postdata['post'];
+				@endphp
+				<div class="container-fluid row">
+								<div class="col-md-6 col-xl-4 tile mx-1">
+												<div class="card-header">Edit your article in style</div>
+												<div class="card-body">
+																<h3 class="display-5 text-success"><small>{{ auth()->user()->name }}</small></h3>
+																<h6><small>{{ auth()->user()->email }}</small> </h6>
+																<hr>
+												</div>
+												<div class="card">
+																<div class="card-header">
+																				<h5 class="float-left">Top images</h5>
+																				<a href="{{ route('author.postimages.index') }}"
+																								class="btn btn-sm btn-outline-info mr-auto float-right">Browse</a>
+																</div>
+																<div class="card-body">
+																				@if (session('image_title'))
+																								<div id="titleimagediv">
+																												@foreach (session('image_title') as $key => $image)
+																																<div class="row d-flex justify-content-between">
+																																				<div class="col-md-2 icon m-1">
+																																								<img src="{{ $image }}" alt="title image" width="35" height="35">
+																																				</div>
+																																				<div class="col-md">
+																																								<input type="text" value="{{ $image }} "
+																																												id="titleimageUrlInput-{{ $key }}" class="disabled form-control">
+																																				</div>
+																																				<div class="col-md-3">
+																																								<button class="btn btn-secondary btn-sm"
+																																												onclick="copyImageUrl('titleimageUrlInput-'+@json($key),'titleimageUrlBtn-'+@json($key))"
+																																												id="titleimageUrlBtn-{{ $key }}">Copy</button>
+																																				</div>
+																																				<div class="col-md-3">
+																																								<div class="row d-flex justify-content-center">
+																																												<button class="btn btn-outline-danger float-left ml-auto  btn-sm mr-1"
+																																																onclick="event.preventDefault(); document.getElementById('sessiontitleimageform'+@json($key)).submit();"
+																																																id="imageUrlBtn{{ $key }}">Remove</button>
 																																								</div>
-																																				@endforeach
-																																@endif
-
-																																<hr>
-
-																																<div class="form-group p-2">
-																																				<h3>Category of your article</h3>
-																																				<h4 class="">Category: {{ $postdata['post']->post_category_name }}
-																																				</h4>
-																																				<br>
-																																				<hr>
-																																</div>
-																																<div class="form-group">
-																																				<h4 class="">Title: {{ $postdata['post']->post_title }}
-																																				</h4>
-
-																																				<br>
-																																				<hr>
-
-
-																																</div>
-																																<div class="form-group">
-																																				<h4 class="">Subtitle: {{ $postdata['post']->post_subtitle }}
-																																				</h4>
-																																				<br>
-																																				<hr>
-																																</div>
-
-																																<h3>Post Body Images</h3>
-
-																																@if ($postdata['images'] != null && count($postdata['images']) > 0)
-																																				@foreach ($postdata['images'] as $key => $image)
-																																								<div class="row m-1">
-																																												<div class="col-md-2 icon m-1">
-																																																<img src="{{ $image }}" alt="article image" width="35"
-																																																				height="35">
-																																												</div>
-																																												<input type="text" value="{{ $image }} "
-																																																id="imageUrlInput{{ $key }}" class="disabled">
-
-																																												<button class="btn btn-secondary ml-2"
-																																																onclick="copyImageUrl('imageUrlInput'+@json($key),'imageUrlBtn'+@json($key))"
-																																																id="imageUrlBtn{{ $key }}">Copy</button>
+																																								<div class="d-none">
+																																												<form action="{{ route('author.removesessionimage') }}" method="POST"
+																																																id="sessiontitleimageform{{ $key }}">
+																																																@csrf
+																																																<input type="text" class="form-control" name="image_title"
+																																																				value="{{ $key }}">
+																																												</form>
 																																								</div>
-																																				@endforeach
-																																@endif
-
-																												</div>
-
+																																				</div>
+																																</div>
+																												@endforeach
 																								</div>
+																				@endif
+																</div>
+												</div>
+												<hr>
+												<div class="card">
+																<div class="card-header">
+																				<h5 class="float-left">Body Images</h5>
+																				<a href="{{ route('author.postimages.index') }}"
+																								class="btn btn-sm btn-outline-success mr-auto float-right">Browse</a>
+																</div>
+																<div class="card-body">
+																				@if (session('images'))
+																								@foreach (session('images') as $key => $image)
+																												<div class="row d-flex justify-content-between">
+																																<div class="col-md-2 icon m-1">
+																																				<img src="{{ $image }}" alt="title image" width="35" height="35">
+																																</div>
+																																<div class="col-md">
+																																				<input type="text" value="{{ $image }} "
+																																								id="imageUrlInput-{{ $key }}" class="disabled form-control">
+																																</div>
+																																<div class="col-md-3">
+																																				<button class="btn btn-secondary btn-sm"
+																																								onclick="copyImageUrl('imageUrlInput-'+@json($key),'imageUrlBtn-'+@json($key))"
+																																								id="imageUrlBtn-{{ $key }}">Copy</button>
+																																</div>
+																																<div class="col-md-3">
+																																				<div class="row d-flex justify-content-center">
+																																								<button class="btn btn-outline-danger float-left ml-auto  btn-sm mr-1"
+																																												onclick="event.preventDefault(); document.getElementById('sessionimageform'+@json($key)).submit();"
+																																												id="imageUrlBtn{{ $key }}">Remove</button>
+																																				</div>
+																																				<div class="d-none">
+																																								<form action="{{ route('author.removesessionimage') }}" method="POST"
+																																												id="sessionimageform{{ $key }}">
+																																												@csrf
+																																												<input type="text" class="form-control" name="image"
+																																																value="{{ $key }}">
+																																								</form>
+																																				</div>
+																																</div>
+																												</div>
+																								@endforeach
+																				@endif
+																</div>
+																<div class="card-footer">
 
-
-
-																				</div>
 																</div>
 												</div>
 								</div>
-								<div class=" col-md-8 col-xl-8">
+								<div class="col-md-6 col-xl-7 tile">
+												{{--  article-description  --}}
+												<div class="article-description">
+																<div class="form-group">
+																				<p class=""><strong>Category:</strong>
+																								{{ $postdata['post']->post_category_name }}
+																				</p>
+																				<hr>
+																</div>
+																<div class="form-group">
+																				<p class=""><strong>Title:</strong> {{ $postdata['post']->post_title }}
+																				</p>
+																				<hr>
+
+
+																</div>
+																<div class="form-group">
+																				<p class=""><strong>Subtitle:</strong> {{ $postdata['post']->post_subtitle }}
+																				</p>
+																</div>
+																<hr>
+												</div>
 												<form method="POST"
-																action="{{ route('post.postbody.update', ['post' => $postdata['post']->id, 'postbody' => $postdata['post']->id]) }}"
+																action="{{ route('author.post.postbody.update', ['post' => $postdata['post']->id, 'postbody' => $postdata['post']->id]) }}"
 																enctype="multipart/form-data" id="postForm">
 																@method('PUT')
 																@csrf
@@ -109,14 +150,8 @@
 																								Article</a>
 																</div>
 
+												</form>
 								</div>
-
-
-
-
-
-								</form>
-
 				</div>
 				</div>
 
@@ -183,10 +218,11 @@
 
 				<!-- submitForm preview js-->
 
-				function submitForm($id) {
-				var form_route = $id
-				var form_action = "/user/post/preview/";
-				document.getElementById("postForm").action = form_action + form_route;
+				function submitForm(id) {
+				var form_route = id;
+				var form_action = '{{ route('author.post.preview', ['id' => $post->id]) }}';
+				//document.getElementById("postForm").action = form_action + form_route;
+				document.getElementById("postForm").action = form_action;
 				document.getElementById("postForm").submit();
 				}
 				</script>

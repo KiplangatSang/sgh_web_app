@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Client;
 
 use App\Models\Articles\Categories;
 use App\Http\Controllers\Controller;

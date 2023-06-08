@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Author;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Articles\Categories;
 use App\Models\Posts\Posts;
@@ -10,27 +11,26 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class PostController extends Controller
+class PostController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
 
-    protected $user;
 
     public function __construct()
     {
-        $this->user =  User::where('id', auth()->id())->first();
     }
     public function index()
     {
         //
 
-        $posts = $this->user->posts()->orderBy('created_at', 'DESC')->get();
-        $data = array();
-        $data['posts'] = $posts;
+        $posts = $this->user()->posts()->orderBy('created_at', 'DESC')->get();
 
-        return view('author.post.index', compact('data'));
+
+       // return  $posts;
+
+        return view('author.post.index', compact('posts'));
     }
 
     /**
@@ -40,12 +40,12 @@ class PostController extends Controller
     {
         //
         //
-        $images = $this->user->postImages()->whereNotNull('image')->orderBy('created_at', 'DESC')->get();
-        $top_images = $this->user->postImages()->whereNotNull('post_top_image')->orderBy('created_at', 'DESC')->get();
+        // return auth()->id();
+        $images = $this->user()->postImages()->whereNotNull('image')->orderBy('created_at', 'DESC')->get();
+        $top_images = $this->user()->postImages()->whereNotNull('post_top_image')->orderBy('created_at', 'DESC')->get();
         $category = Categories::all();
 
         // dd($category);
-        $postdata = array();
         $postdata['images'] = $images;
         $postdata['category'] = $category;
         $postdata['top_images'] = $top_images;
@@ -70,12 +70,9 @@ class PostController extends Controller
 
 
         try {
-            $post_id = Str::random(60);
-            // $post_top_image = $this->user->postImages()->whereNotNull('post_top_image')
-            //     ->take(2)
-            //     ->get('post_top_image');
+            $post_id = urlencode(htmlspecialchars($request['post_title']));
             $post_top_image = json_encode(session('image_title'));
-            $result = $this->user->posts()->create(
+            $result = $this->user()->posts()->create(
                 [
                     'post_id' => $post_id,
                     'post_title' => $request->post_title,
@@ -88,25 +85,20 @@ class PostController extends Controller
                 ]
             );
 
-            // if (!$request->post_body) {
-
-            //     return redirect('/user/post/move_to_editor/' . $post_id)->with('success', 'Congracts!! now work on your Article');
-            // }
-            return redirect(route('post.postbody.create', ['post' => $result->id]))->with('success', 'Post Uploaded');
+            return redirect(route('author.post.postbody.create', ['post' => $result->id]))->with('success', 'Post Uploaded');
         } catch (Exception $e) {
             return back()->with('message', $e->getMessage());
         }
     }
 
-
     /**
      * Display the specified resource.
      */
 
-    public function show($post_id)
+    public function show($id)
     {
         //
-        $post = Posts::where('post_id', $post_id)->first();
+        $post = Posts::where('id', $id)->first();
         $comments = $post->comments()->get();
         $likes = $post->likes()->get();
 
@@ -127,7 +119,7 @@ class PostController extends Controller
     public function edit($id)
     {
 
-        $images = $this->user->postImages()->whereNotNull('image')->orderBy('created_at', 'DESC')->get();
+        $images = $this->user()->postImages()->whereNotNull('image')->orderBy('created_at', 'DESC')->get();
         $top_images = session('image_title');
 
 
@@ -160,7 +152,6 @@ class PostController extends Controller
 
         ]);
         $post = Posts::where('id', $id)->first();
-        $this->user = User::where('id', auth()->id())->first();
         $post_top_image = json_encode(session('image_title'));
         try {
             $post->update(
@@ -174,7 +165,7 @@ class PostController extends Controller
                     'post_regulation' => false,
                 ]
             );
-            return redirect(route('post.postbody.edit', ['post' => $post->id, 'postbody' => $post->id]))->with('success', 'Update success, Edit your article now');
+            return redirect(route('author.post.postbody.edit', ['post' => $post->id, 'postbody' => $post->id]))->with('success', 'Update success, Edit your article now');
         } catch (Exception $e) {
             return back()->with('message', $e->getMessage());
         }
@@ -187,7 +178,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         Posts::destroy($id);
-        return redirect('/user/post/index')->with('success', 'Post Deleted');
+        return redirect(route('author.posts.index'))->with('success', 'Post Deleted');
     }
 
     public function preview(Request $request, $id)
@@ -197,9 +188,6 @@ class PostController extends Controller
             'post_body' => 'required',
 
         ]);
-
-        $this->user = User::whereIn('id', auth()->user())->first();
-
 
         $post = Posts::where('id', $id)->first();
         $post->update([
@@ -228,9 +216,6 @@ class PostController extends Controller
             'post_body' => 'required',
 
         ]);
-
-        $this->user = User::whereIn('id', auth()->user())->first();
-
 
         $post = Posts::where('id', $id)->first();
         $post->update([

@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        if (auth()->user()->isAdmin == true) {
+        if (auth()->user()->isAdmin == true  && User::admin) {
             $userscount = count(User::all());
             $articlescount = count(Posts::all());
             $publishedcount = count(Posts::all());
@@ -48,7 +48,7 @@ class HomeController extends Controller
 
             return view('admin.home', compact('homedata'));
         } else {
-            if (auth()->user()->role == 1) {
+            if (auth()->user()->role == User::author) {
                 $user = User::where('id', auth()->user()->id)->first();
 
                 $posts = $user->posts()->orderBy('created_at', 'DESC')->get();

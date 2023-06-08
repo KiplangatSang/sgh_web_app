@@ -72,4 +72,8 @@ class User extends Authenticatable
     {
         return $this->morphMany(ExternalPostsAPI::class, 'apiable');
     }
+
+    public const admin = 0;
+    public const author = 1;
+    public const reader = 2;
 }

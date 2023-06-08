@@ -1,20 +1,25 @@
 @extends('layouts.app')
 @section('content')
+				@php
+								$post = $postsdata['post'];
+				@endphp
 				<div class="container bg-white ">
 								<div class="tile row">
 												<div class="tile-title m-2">
 																<a href="/home" class="btn btn-primary">Home</a>
 												</div>
 												<div class="tile-title m-2">
-																<a href="/users/posts/post/{{ $postsdata['post']->post_id }}" class="btn btn-secondary">View in Webs</a>
+																<a href="/users/posts/post/{{ $postsdata['post']->post_id }}" class="btn btn-secondary">View in Web</a>
 
 												</div>
 												<div class="tile-title m-2">
-																<a href="/user/post/edit/{{ $postsdata['post']->id }}" class="btn btn-info">Edit</a>
+																<a href="{{ route('author.posts.edit', ['post' => $postsdata['post']->id]) }}" class="btn btn-info">Edit</a>
 
 												</div>
 												<div class="tile-title m-2">
-																<form action="/user/post/delete/" method="POST" enctype="multipart/form-data" id="postForm">
+																<form action="{{ route('author.posts.destroy', ['post' => $postsdata['post']->id]) }}" method="POST"
+																				enctype="multipart/form-data" id="postForm">
+																				@method('DELETE')
 																				@csrf
 																				<a type="submit" class="btn btn-danger"
 																								onclick="notifyDeleteform(@json($postsdata['post']->id))">Delete</a>
@@ -82,7 +87,7 @@
 												</div>
 								</div>
 				</div>
-                <script type="text/javascript" src="{{ asset('assets2/js/plugins/sweetalert.min.js') }}"></script>
+				<script type="text/javascript" src="{{ asset('assets2/js/plugins/sweetalert.min.js') }}"></script>
 
 				<script type="text/javascript">
 								function notifyDeleteform(id) {
@@ -98,9 +103,10 @@
 																if (isConfirm) {
 
 																				var form_route = id
-																				var form_action = "/user/post/delete/";
-																				document.getElementById("postForm").action = form_action + form_route;
-																				document.getElementById("postForm").submit();
+																				var form_action = '{{ route('author.posts.destroy', ['post' => $post->id]) }}';
+																				//document.getElementById("postForm").action = form_action + form_route;
+																				document.getElementById("postForm").action = form_action;
+                                                                                document.getElementById("postForm").submit();
 
 																				swal("Success!", "The post has been deleted.", "success");
 
@@ -110,6 +116,7 @@
 												});
 
 								}
+
 								function showDiv() {
 												const el = document.getElementById('comment-cont');
 

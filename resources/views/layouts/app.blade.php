@@ -8,7 +8,7 @@
 				<!-- CSRF Token -->
 				<meta name="csrf-token" content="{{ csrf_token() }}">
 
-				<title>{{ config('app.name', 'SG-H') }}</title>
+				<title>{{ config('app.name', 'SG $ H') }}</title>
 
 				<!-- Scripts -->
 				<script src="{{ asset('js/app.js') }}" defer></script>
@@ -91,8 +91,8 @@
 				</div>
 
                 <!-- Essential javascripts for application to work-->
-				<script src="{{ asset('assets2/js/popper.min.js') }}"></script>
-				<script src="{{ asset('assets2/js/bootstrap.min.js') }}"></script>
+				{{--  <script src="{{ asset('assets2/js/popper.min.js') }}"></script>  --}}
+				{{--  <script src="{{ asset('assets2/js/bootstrap.min.js') }}"></script>  --}}
 				<script src="{{ asset('assets2/js/main.js') }}"></script>
 				<!-- The javascript plugin to display page loading on top-->
 				<script src="{{ asset('assets2/js/plugins/pace.min.js') }}"></script>

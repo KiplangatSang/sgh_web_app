@@ -6,7 +6,7 @@
   </section>
   <section class="login-content " >
     <div class="logo m-1">
-      <h1><strong>SG-H</strong></h1>
+      <h1><strong>{{ config('app.name') }}</strong></h1>
     </div>
     <div class="container vh-100 bg-image "
 								{{-- style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.jpg');" --}}>

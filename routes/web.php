@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
-use App\Models\Articles\Categories;
 use App\Http\Controllers\Admin\Articles\ArticleController;
-use App\Http\Controllers\Admin\Articles\ArticleProcessingController;
 use App\Http\Controllers\Admin\Articles\PendingArticleController;
 use App\Http\Controllers\Admin\Articles\PublishedArticleController;
 use App\Http\Controllers\Admin\Categories\CategoryController;
@@ -13,23 +11,25 @@ use App\Http\Controllers\Admin\ExternalPostsAPIController;
 use App\Http\Controllers\Admin\Users\AccountController;
 use App\Http\Controllers\Admin\Users\AccountSuspensionController;
 use App\Http\Controllers\Admin\Users\ArticleController as UsersArticleController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Author\PostBodyController;
 use App\Http\Controllers\Author\PostController as AuthorPostController;
 use App\Http\Controllers\Client\ResponseController;
 use App\Http\Controllers\ClientPostController;
 use App\Http\Controllers\ExternalNewsController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Post\PostBodyController;
 use App\Http\Controllers\Posts\BusinessController;
-use App\Http\Controllers\Post\PostController;
-use App\Http\Controllers\Post\PostImageController;
+use App\Http\Controllers\Author\PostImageController;
 use App\Http\Controllers\Posts\NewsCotroller;
 use App\Http\Controllers\Posts\PoemController;
 use App\Http\Controllers\Posts\SportController;
 use App\Http\Controllers\Posts\TechCotroller;
 use App\Http\Controllers\Settings\SettingController;
+use App\Http\Controllers\TwitterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +42,14 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Auth::routes();
+Auth::routes(['login' => false, 'register' => false]);
+
+Route::get('/login', [LoginController::class, "loginView"]);
+Route::post('/login', [LoginController::class, "login"])->name('login');
+
+
+Route::get('/register',  [RegisterController::class, "registerView"])->middleware('auth', 'admin');
+Route::post('/register', [RegisterController::class, "register"])->name('register')->middleware('auth', 'admin');
 
 
 //email verification
@@ -50,8 +57,7 @@ Route::get('/email/verify', function () {
     return view('auth.verify');
 })->middleware('auth')->name('verification.notice');
 
-#The Email Verification Handler
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
@@ -112,41 +118,52 @@ Route::get('/articles/articles', function () {
 //client responses
 Route::post('/user/contact/client/response/store', [ResponseController::class, 'store']);
 
-//post
-Route::get('/user/post/index', [PostController::class, 'index']);
-Route::get('/user/post/create', [PostController::class, 'create']);
-Route::post('/user/post/store', [PostController::class, 'store']);
-Route::get('/user/post/show/{id}', [PostController::class, 'show']);
-Route::get('/user/post/edit/{id}', [PostController::class, 'edit']);
-Route::post('/user/post/update/{id}', [PostController::class, 'update']);
-Route::post('/user/post/delete/{id}', [PostController::class, 'destroy']);
-
-Route::get('/externalnewsitems/updatePosts', [ExternalNewsController::class,'updatePosts']);
+Route::get('/externalnewsitems/updatePosts', [ExternalNewsController::class, 'updatePosts']);
 
 Route::resource('/externalnewsitems', ExternalNewsController::class);
 
-Route::prefix('/author')->name('author.')->middleware(['auth', 'author',])->group(
-    function () {
-        Route::post('/post/preview/{id}', [AuthorPostController::class, 'preview'])->name('preview');
-        Route::post('/post/veiwinweb/{id}', [AuthorPostController::class, 'viewInWeb'])->name('veiwinweb');
-        Route::resource('post', AuthorPostController::class);
+Route::resource('/twitter', TwitterController::class);
 
+Route::prefix('/author')->name('author.')->middleware(['auth', 'author', 'verified'])->group(
+    function () {
+
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+        Route::put('/post/preview/{id}', [AuthorPostController::class, 'preview'])->name('post.preview');
+        Route::post('/post/veiwinweb/{id}', [AuthorPostController::class, 'viewInWeb'])->name('veiwinweb');
+        Route::resource('posts', AuthorPostController::class);
+
+        //post article top image
+        Route::post('/postimages/title/store', [PostImageController::class, 'storeTitleImage'])->name('storepostimagetitle');
 
         //post images
-        Route::resource('postimages', PostImageController::class);
+        Route::post('savesessionimage', [PostImageController::class, 'storesessionimage'])->name('storesessionimage');
+        Route::post('removesessionimage', [PostImageController::class, 'removesessionimage'])->name('removesessionimage');
 
-        Route::get('images/index', [PostImageController::class, 'index']);
-        Route::get('/post/image/create', [PostImageController::class, 'create']);
-        Route::post('/post/image/store/{post_id}', [PostImageController::class, 'store']);
-        Route::get('/post/image/show/{id}', [PostImageController::class, 'show']);
-        Route::get('/post/image/edit/{id}', [PostImageController::class, 'edit']);
-        Route::get('/post/image/update/{id}', [PostImageController::class, 'update']);
-        Route::get('/post/image/delete/{id}', [PostImageController::class, 'destroy']);
+        Route::resource('postimages', PostImageController::class);
+        //move to word editor to edit the article body
+        Route::resource('post.postbody', PostBodyController::class);
+
+
+        //check session images
+
+        // to do.
+        Route::get('/check-session', function () {
+            if (session()->has('images')  || session()->has('image_title')) { // Replace 'key' with the actual key used in your session
+                $postimages = array(
+                    'images' => session('images'),
+                    'image_title' => session('image_title'),
+                );
+                return $postimages;
+            } else {
+                return 'expired';
+            }
+        })->name('check.session');
     }
 );
 
-//move to word editor to edit the article body
-Route::resource('post.postbody', PostBodyController::class);
+
 
 // Route::get('/user/post/move_to_editor/{id}', [PostController::class, 'moveToArticleEditor']);
 // Route::post('/user/post/update-article-desc/{id}', [PostController::class, 'updateArticleDescription']);
@@ -160,13 +177,6 @@ Route::get('/post/image/show/{id}', [PostImageController::class, 'show']);
 Route::get('/post/image/edit/{id}', [PostImageController::class, 'edit']);
 Route::get('/post/image/update/{id}', [PostImageController::class, 'update']);
 Route::get('/post/image/delete/{id}', [PostImageController::class, 'destroy']);
-
-//post article top image
-
-Route::post('/post/image/title/store/{post_id}', [PostImageController::class, 'storeTitleImage']);
-
-
-
 
 
 //settings
@@ -182,6 +192,10 @@ Route::post('/post/image/firebase', [PostImageController::class, 'uploadImageToF
 
 Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin',])->group(
     function () {
+
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
         Route::resource('categories', CategoryController::class);
 
         //articles
@@ -208,11 +222,3 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin',])->group(
         Route::resource('/apis', ExternalPostsAPIController::class);
     }
 );
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

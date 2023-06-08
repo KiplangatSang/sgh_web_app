@@ -20,10 +20,10 @@
 																												<h5 class="display-5  mt-1 ml-2 text-info">{{ count($data['posts']) }} Posts</h5>
 																								</div>
 																								<hr>
-                                                                                                @if (count($data['posts']) > 0)
-                                                                                                <a href="/user/post/index" class="btn btn-primary">View Posts</a>
-                                                                                                @endif
-                                                                                                <a href="/user/post/create" class="btn btn-primary">Create Post</a>
+																								@if (count($data['posts']) > 0)
+																												<a href="{{ route('author.posts.index') }}" class="btn btn-primary">View Posts</a>
+																								@endif
+																								<a href="{{ route('author.posts.create') }}" class="btn btn-primary">Create Post</a>
 
 																				</div>
 																				<div class="tile ">
@@ -32,7 +32,7 @@
 																												<h5 class="display-5  mt-1 ml-2 text-info">{{ count($data['posts']) }} Posts</h5>
 																								</div>
 																								<hr>
-																								<a href="/user/post/index" class="btn btn-primary">Subscribers</a>
+																								<a href="{{ route('author.posts.index') }}" class="btn btn-primary">Subscribers</a>
 																				</div>
 																				<div class="tile ">
 																								<div class="row">
@@ -70,21 +70,19 @@
 
 												@foreach ($data['posts'] as $post)
 																<div class="tile post-div mt-2">
-
-
-
 																				<div class="row m-1">
-																								<a href="/user/post/show/{{ $post->post_id }}" class="btn btn-success mr-5">View</a>
+																								<a href="{{ route('author.posts.show', ['post' => $post->id]) }}"
+																												class="btn btn-success mr-5">Views</a>
 
-																								<input type=" form-group ml-1" value="{{ env('POST_BASE_URL') .$post->post_id }} "
-																												id="postUrlInput{{ $post->id }}" class="disabled">
+																								<input type=" form-group ml-1" value="{{ env('POST_BASE_URL') . $post->post_id }} "
+																												id="postrouteInput{{ $post->id }}" class="disabled">
 
 
 																								<div class="">
-																												<button class="btn btn-secondary ml-2" {{-- {{ dd($post->post_id)}} --}}
-																																onclick="copyImageUrl('postUrlInput'+@json($post->id),'postUrlBtn'+@json($post->id))"
-																																id="postUrlBtn{{ $post->id }}">Copy Link</button>
-																												{{-- 'postUrlBtn'+@json($post->id) --}}
+																												<button class="btn btn-secondary ml-2"
+																																onclick="copyImageroute('postrouteInput'+@json($post->id),'postrouteBtn'+@json($post->id))"
+																																id="postrouteBtn{{ $post->id }}">Copy Link</button>
+																												{{-- 'postrouteBtn'+@json($post->id) --}}
 
 
 																								</div>
@@ -104,13 +102,13 @@
 																				<hr>
 																				<br>
 																				<div class="row comment-cont" onmouseover="showDiv()">
-																								<div class="col col-md-6 " >
+																								<div class="col col-md-6 ">
 
 																												<div class="m-1 row">
-																																<div id="comment-cont "  >
-                                                                                                                                    <div class="feature-icon p-1">
-                                                                                                                                        <h4><i class="fa-light fa-comment"> Comments</i></h4>
-                                                                                                                                    </div>
+																																<div id="comment-cont ">
+																																				<div class="feature-icon p-1">
+																																								<h4><i class="fa-light fa-comment"> Comments</i></h4>
+																																				</div>
 																																				<div id="hidden-div" class="hidden-div p-3">
 
 																																								<a class="m-1" href="/post/comment/view/{{ $post->id }}">View</a>
@@ -149,57 +147,57 @@
 				</div>
 
 				<script type="text/javascript">
-                function showDiv() {
-				        const el = document.getElementById('comment-cont');
+								function showDiv() {
+												const el = document.getElementById('comment-cont');
 
-				        const hiddenDiv = document.getElementById('hidden-div');
+												const hiddenDiv = document.getElementById('hidden-div');
 
-				        el.addEventListener('mouseover', function handleMouseOver() {
-				            hiddenDiv.style.visibility = 'visible';
-				        });
+												el.addEventListener('mouseover', function handleMouseOver() {
+																hiddenDiv.style.visibility = 'visible';
+												});
 
-				        // ✅ (optionally) Hide DIV on mouse out
-				        el.addEventListener('mouseout', function handleMouseOut() {
-				            // 👇️ if you used visibility property to hide div
-				            hiddenDiv.style.visibility = 'hidden';
-				        });
-				    }
+												// ✅ (optionally) Hide DIV on mouse out
+												el.addEventListener('mouseout', function handleMouseOut() {
+																// 👇️ if you used visibility property to hide div
+																hiddenDiv.style.visibility = 'hidden';
+												});
+								}
 
-				    function copyImageUrl(inputId, button_id) {
-				        /* Get the text field */
-				        var copyText = document.getElementById(inputId);
-				        var copyButton = document.getElementById(button_id);
+								function copyImageroute(inputId, button_id) {
+												/* Get the text field */
+												var copyText = document.getElementById(inputId);
+												var copyButton = document.getElementById(button_id);
 
-				        /* Select the text field */
-				        copyText.select();
-				        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+												/* Select the text field */
+												copyText.select();
+												copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
-				        /* Copy the text inside the text field */
-				        navigator.clipboard.writeText(copyText.value);
+												/* Copy the text inside the text field */
+												navigator.clipboard.writeText(copyText.value);
 
-				        copyButton.innerHTML = "Copied";
-				        copyButton.style.backgroundColor = 'white';
-				        copyButton.style.color = 'green';
+												copyButton.innerHTML = "Copied";
+												copyButton.style.backgroundColor = 'white';
+												copyButton.style.color = 'green';
 
 
-				    }
+								}
 				</script>
 
 				<script type="text/javascript">
-				    const el = document.getElementById('comment-cont');
+								const el = document.getElementById('comment-cont');
 
-				    const hiddenDiv = document.getElementById('hidden-div');
-				    // hiddenDiv.style.visibility = 'visible';
+								const hiddenDiv = document.getElementById('hidden-div');
+								// hiddenDiv.style.visibility = 'visible';
 
-				    // ✅ Show hidden DIV on hover
-				    el.addEventListener('mouseover', function handleMouseOver() {
-				        hiddenDiv.style.visibility = 'visible';
-				    });
+								// ✅ Show hidden DIV on hover
+								el.addEventListener('mouseover', function handleMouseOver() {
+												hiddenDiv.style.visibility = 'visible';
+								});
 
-				    // ✅ (optionally) Hide DIV on mouse out
-				    el.addEventListener('mouseout', function handleMouseOut() {
-				        // 👇️ if you used visibility property to hide div
-				        hiddenDiv.style.visibility = 'hidden';
-				    });
+								// ✅ (optionally) Hide DIV on mouse out
+								el.addEventListener('mouseout', function handleMouseOut() {
+												// 👇️ if you used visibility property to hide div
+												hiddenDiv.style.visibility = 'hidden';
+								});
 				</script>
 @endsection

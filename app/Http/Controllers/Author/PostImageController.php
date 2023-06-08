@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\Author;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Firebase\StorageRepository;
 use App\Models\Posts\Posts;
@@ -13,7 +14,7 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class PostImageController extends Controller
+class PostImageController extends BaseController
 {
 
 
@@ -21,7 +22,6 @@ class PostImageController extends Controller
     public function index()
     {
         //
-
         $images = PostsImages::simplePaginate($this->paginate);
         return view('author.images.index', compact('images'));
     }
@@ -45,7 +45,7 @@ class PostImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         //
 
@@ -54,10 +54,7 @@ class PostImageController extends Controller
         $storageRepo = new StorageRepository();
         $image = $storageRepo->store($uploadfile);
 
-
-        $post = Posts::where('id', $id)->first();
-
-        $post->postImages()->create([
+        $this->user()->postImages()->create([
             'image' => $image,
         ]);
 
@@ -70,13 +67,16 @@ class PostImageController extends Controller
     }
 
 
-    public function storeTitleImage(Request $request, $id)
+    public function storeTitleImage(Request $request)
     {
         $uploadfile = $request->file('file');
 
         $storageRepo = new StorageRepository();
         $image = $storageRepo->store($uploadfile);
 
+        $this->user()->postImages()->create([
+            'post_top_image' => $image,
+        ]);
 
         $imageArray = array();
         if (session()->has('image_title')) {
@@ -84,6 +84,62 @@ class PostImageController extends Controller
         }
         array_push($imageArray, $image);
         $request->session()->put('image_title', $imageArray);
+    }
+
+    public function storesessionimage(Request $request)
+    {
+
+        if ($request->image_title != null) {
+            $image = $request->image_title;
+            $imageArray = array();
+            if (session()->has('image_title')) {
+                $imageArray =  session('image_title');
+            }
+            array_push($imageArray, $image);
+            $request->session()->put('image_title', $imageArray);
+            return back()->with("success", "image title saved ");
+        } elseif ($request->image != null) {
+            $image = $request->image;
+            $imageArr = array();
+            if (session()->has('images')) {
+                $imageArr =  session('images');
+            }
+            array_push($imageArr, $image);
+            $request->session()->put('images', $imageArr);
+
+            return back()->with("success", "image saved ");
+        } else
+            return back()->with("error", "Could not save image");
+    }
+
+    public function removesessionimage(Request $request)
+    {
+
+
+        if ($request->image_title != null) {
+
+            $image = $request->image_title;
+            $imageArray = array();
+            if (session()->has('image_title')) {
+                $imageArray =  session('image_title');
+            }
+            unset($imageArray[$image]);
+            $request->session()->put('image_title', $imageArray);
+            return back()->with("success", "image title removed ");
+        }
+        if ($request->image != null) {
+            $image = $request->image;
+            $imageArr = array();
+            if (session()->has('images')) {
+                $imageArr =  session('images');
+            }
+            unset($imageArr[$image]);
+            $request->session()->put('images', $imageArr);
+
+            return back()->with("success", "image removed ");
+        } else {
+            return back()->with("error", "Could not remove image");
+        }
     }
 
     public function uploadImageToFirebase(Request $request)
