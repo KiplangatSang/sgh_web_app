@@ -96,7 +96,7 @@ Route::get('/articles/hidden', function () {
 });
 
 Route::get('/users/posts/post/{post_id}', [ClientPostController::class, 'show']);
-Route::get('/{post_title}', [ClientPostController::class, 'show']);
+Route::get('/article/{post_title}', [ClientPostController::class, 'show'])->name('post.show');
 // Route::post('/{post_title}', [ClientPostController::class, 'show']);
 
 
@@ -223,6 +223,6 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin',])->group(
     }
 );
 
-Route::view('/customer/help', 'help')->name('customer.help');
+Route::view('/help', 'help')->name('customer.help');
 
 

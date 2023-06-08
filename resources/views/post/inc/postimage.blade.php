@@ -1,6 +1,9 @@
 <div class="post-preview">
 
-				<a href="/{{ urlencode(htmlspecialchars($post->post_id)) }}">
+				{{--  urlencode(htmlspecialchars($post->post_id))  --}}
+				{{--  <a href="{{ route('post.show', ['post_title' => $post->title])}}">  --}}
+				{{--  <a href="{{ route('viewpost', ['post_id' => $post->post_id]) }}">  --}}
+				<a href="/article/{{ urlencode(htmlspecialchars($post->post_id)) }}">
 								<h4 class="post-title">{!! $post->post_title !!}</h4>
 								<p class="post-subtitle">{!! $post->post_subtitle !!}</p>
 
@@ -14,7 +17,7 @@
 								<h6 class="meta"> <small>
 																Story by
 																<a href="#!" class="text-info">{{ $post->postable()->first()->name }}</a>
-																 {{ " ". $post->created_at->diffForHumans() }}</small>
+																{{ ' ' . $post->created_at->diffForHumans() }}</small>
 												{{--  on {{ $post->created_at->format('D M Y  H:II') . ' hrs' }}</small>  --}}
 								</h6>
 				</a>
