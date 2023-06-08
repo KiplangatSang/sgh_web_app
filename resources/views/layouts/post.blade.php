@@ -5,6 +5,7 @@
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 				<meta name="name" content="{{ config('app.name') }}">
+                <title>{{ config('app.name', 'SGNH') }} | Where art meets profession</title>
 				<title>@yield('title')</title>
 				<meta name="url" content="{{ config('app.url') }}">
 				<meta name="description" content="@yield('description')">
