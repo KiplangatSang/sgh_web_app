@@ -222,3 +222,7 @@ Route::prefix('/admin')->name('admin.')->middleware(['auth', 'admin',])->group(
         Route::resource('/apis', ExternalPostsAPIController::class);
     }
 );
+
+Route::view('/customer/help', 'help')->name('customer.help');
+
+
