@@ -37,7 +37,7 @@ class GenerateSitemap extends Command
         Posts::get()->each(function (Posts $post) use ($postsitmap) {
             $postsitmap->add(
                 Url::create("/{$post->post_title}")
-                    ->setPriority(0.9)
+                    ->setPriority(0.5)
                     ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
             );
         });
