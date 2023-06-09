@@ -1,4 +1,7 @@
 @extends('layouts.post')
+@section('title', 'SGNH | Where art meets profession!')
+@section('description', ' News | Sports |Poems | Songs | Business | Articles | Technology')
+@section('author', ' News | Sports |Poems | Songs | Business | Articles | Technology')
 @section('content')
 				<div>
 								@include('inc.posts_header')
@@ -45,13 +48,13 @@
 																				</div>
 																				<div class="row ml-2 justify-content-center">
 																								<div class="col col-md-6 col-xl tile m-1">
-																												<h2>Anonymous Reporting Channel: Ethics hotline</h2>
+																												<h2>SGNH Anonymous Reporting Channel: Ethics hotline</h2>
 																												<p> Report secretly by:
 																																Calling: <strong>+254714680763</strong>
 																																Email: <strong> ethics@sgnh.storms.co.ke</strong>
 																												</p>
 
-																												sgnh Limited Nairobi Website: sgnh.storms.co.ke.com
+																												SGNH Limited Nairobi Website: sgnh.storms.co.ke
 																								</div>
 																				</div>
 
