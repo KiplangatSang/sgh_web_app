@@ -7,9 +7,9 @@
 				<meta name="name" content="{{ config('app.name') }}"/>
                 <title>{{ config('app.name', 'SGNH') }} | Where art meets profession</title>
 				<title>@yield('title')</title>
-				<meta name="url" content="{{ config('app.url') }}">
-				<meta name="description" content="@yield('description')">
-				<meta name="author" content="@yield('author')">
+				<meta name="url" content="{{ config('app.url') }}"/>
+				<meta name="description" content="@yield('description')"/>
+				<meta name="author" content="@yield('author')"/>
 				{{--  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />  --}}
 				<!-- Font Awesome icons (free version)-->
 				<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
